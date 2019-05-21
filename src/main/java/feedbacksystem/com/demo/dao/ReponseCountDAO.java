@@ -6,7 +6,12 @@ import feedbacksystem.com.demo.repository.PredefinedResponseRepository;
 import feedbacksystem.com.demo.repository.ResponseCountRepository;
 import org.springframework.stereotype.Component;
 
+import javax.swing.text.html.Option;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Optional;
+import java.util.function.BiPredicate;
+import java.util.function.Predicate;
 
 @Component
 public class ReponseCountDAO {
@@ -19,15 +24,32 @@ public class ReponseCountDAO {
         this.predefinedResponseRepository = predefinedResponseRepository;
     }
 
-    public void addOneToPredefinedResponse(Long idPredefinedResponse){
-        PredefinedResponse predefinedResponse = predefinedResponseRepository.findById(idPredefinedResponse).get();
+    public boolean addOneToPredefinedResponse(Long idPredefinedResponse){
+       Optional<ResponseCount> optionalResponseCount = getResponseCountOfCurrentDayByPredefinedQuestion(idPredefinedResponse);
 
-        ResponseCount responseCount2 = responseCountRepository.findLastOneByIdOfPredefinedQuestion(1L);
+        if(optionalResponseCount.isPresent()){
+            //add
+        }else{
+            //not add
+        }
 
-        System.out.println(responseCount2.getCreatedDateTime());
+        return true;
+    }
 
-        System.out.println(new Date());
 
-        System.out.println("a");
+    public Optional<ResponseCount> getResponseCountOfCurrentDayByPredefinedQuestion(Long predefinedQuestionId){
+        ResponseCount responseCount = responseCountRepository.findLastOneByIdOfPredefinedQuestion(1L);
+        LocalDateTime rightNow = LocalDateTime.now();
+
+        BiPredicate<LocalDateTime, LocalDateTime> isTheSameDate = (date1, date2) ->
+                date2.getDayOfMonth() == date1.getDayOfMonth() &&
+                        date2.getDayOfMonth() == date1.getDayOfMonth() &&
+                        date2.getYear() == date1.getYear();
+
+        if(isTheSameDate.test(responseCount.getCreatedDateTime(), rightNow)){
+            return Optional.of(responseCount);
+        }else{
+            return Optional.empty();
+        }
     }
 }

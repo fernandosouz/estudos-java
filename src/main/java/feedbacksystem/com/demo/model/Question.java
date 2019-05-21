@@ -3,21 +3,23 @@ package feedbacksystem.com.demo.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import feedbacksystem.com.demo.model.utils.AbstractModel;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
-@ToString(exclude={"company"})
+@Getter
+@Setter
 public class Question extends AbstractModel {
 
     private String description;
 
     @ManyToOne
     @JoinColumn(name = "company_id", referencedColumnName = "id")
-    //@JsonIgnoreProperties(value = {"questionList"})
+    @JsonIgnoreProperties(value = {"questionList"})
     private Company company;
 
     @OneToMany(cascade = CascadeType.ALL, fetch= FetchType.LAZY)

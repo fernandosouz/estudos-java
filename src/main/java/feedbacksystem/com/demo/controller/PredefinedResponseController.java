@@ -29,7 +29,6 @@ public class PredefinedResponseController {
 
     @GetMapping(value = "/predefined-response-add-one")
     public ResponseEntity add() {
-        reponseCountDAO.addOneToPredefinedResponse(1L);
-        return new ResponseEntity(HttpStatus.CREATED);
+        return new ResponseEntity(reponseCountDAO.addOneToPredefinedResponse(1L), HttpStatus.CREATED);
     }
 }
