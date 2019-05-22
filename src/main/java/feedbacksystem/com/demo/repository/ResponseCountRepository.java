@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Date;
+
 public interface ResponseCountRepository extends CrudRepository<ResponseCount, Long> {
 
    /* @Query("from ResponseCount a where a.createdDateTime=:date")
@@ -23,5 +25,9 @@ public interface ResponseCountRepository extends CrudRepository<ResponseCount, L
 
     @Query(value="SELECT rc.* FROM response_count rc WHERE rc.predefined_response_id=:id  ORDER BY id DESC LIMIT 1", nativeQuery = true)
     ResponseCount findLastOneByIdOfPredefinedQuestion(@Param("id") Long id);
+
+
+    @Query(value="SELECT sum(rc.count) FROM response_count rc where rc.predefined_response_id=:predefinedResponse AND rc.created_date_time BETWEEN :start AND :end", nativeQuery = true)
+    Long getSumBetweenDatesByPredefinedResponse(@Param("predefinedResponse") Long predefinedResponse, @Param("start") Date start, @Param("end") Date end);
 
 }
