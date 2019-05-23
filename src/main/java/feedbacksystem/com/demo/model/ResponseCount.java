@@ -1,11 +1,9 @@
 package feedbacksystem.com.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import feedbacksystem.com.demo.model.utils.AbstractModel;
-import lombok.Data;
+import feedbacksystem.com.demo.model.utils.AbstractEntity;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -14,7 +12,7 @@ import javax.persistence.ManyToOne;
 @Entity
 @Getter
 @Setter
-public class ResponseCount extends AbstractModel {
+public class ResponseCount extends AbstractEntity {
 
     private Long count;
 

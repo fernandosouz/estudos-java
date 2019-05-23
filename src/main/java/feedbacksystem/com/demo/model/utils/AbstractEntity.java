@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 
 @Data
 @MappedSuperclass
-public abstract class AbstractModel{
+public abstract class AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

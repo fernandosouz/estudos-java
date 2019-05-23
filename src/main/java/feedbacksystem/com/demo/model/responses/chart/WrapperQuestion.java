@@ -1,4 +1,4 @@
-package feedbacksystem.com.demo.model.responses;
+package feedbacksystem.com.demo.model.responses.chart;
 
 
 import lombok.Getter;
@@ -11,6 +11,6 @@ import java.util.List;
 public class WrapperQuestion {
 
     private String description;
-    private List<WrapperPredefinedresponse> wrapperPredefinedresponses;
+    private List<WrappedPredefinedResponseInterface> wrappedPredefinedResponsInterfaces;
 
 }

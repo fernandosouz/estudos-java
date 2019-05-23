@@ -1,33 +1,33 @@
 package feedbacksystem.com.demo.repository;
 
 import feedbacksystem.com.demo.model.ResponseCount;
+import feedbacksystem.com.demo.model.responses.chart.WrappedPredefinedResponseInterface;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.Date;
+import java.util.List;
 
 public interface ResponseCountRepository extends CrudRepository<ResponseCount, Long> {
-
-   /* @Query("from ResponseCount a where a.createdDateTime=:date")
-    public Iterable<ResponseCount> findByDateAndPredefinedQuestion(@Param("categoryName") LocalDateTime date);
-
-    @Query("from ResponseCount a WHERE YEAR(a.fecha)=?1 AND MONTH(mtc.fecha)=?2 AND DAY(mtc.fecha)=?3")
-    public Iterable<ResponseCount> findByDateAndPredefinedQuestion2(@Param("categoryName") LocalDateTime date);
-
-
-    select p from Persons p where (cast(:createdAt as timestamp) is null or p.createdAt > :createdAt)
-
-    @Transactional
-    @Modifying
-    @Query("DELETE FROM MyClass mtc WHERE YEAR(mtc.fecha)=?1 AND MONTH(mtc.fecha)=?2 AND DAY(mtc.fecha)=?3")
-    public void deleteByFecha(Integer year, Integer month, Integer day);*/
 
     @Query(value="SELECT rc.* FROM response_count rc WHERE rc.predefined_response_id=:id  ORDER BY id DESC LIMIT 1", nativeQuery = true)
     ResponseCount findLastOneByIdOfPredefinedQuestion(@Param("id") Long id);
 
-
-    @Query(value="SELECT sum(rc.count) FROM response_count rc where rc.predefined_response_id=:predefinedResponse AND rc.created_date_time BETWEEN :start AND :end", nativeQuery = true)
-    Long getSumBetweenDatesByPredefinedResponse(@Param("predefinedResponse") Long predefinedResponse, @Param("start") Date start, @Param("end") Date end);
-
+    @Query(value="SELECT pr.id AS predefinedId,\n" +
+            "       sum(rc.count) AS sum,\n" +
+            "       pr.description AS predefinedResponseDescription\n" +
+            "    FROM\n" +
+            "         response_count AS rc\n" +
+            "    INNER JOIN\n" +
+            "             predefined_response AS pr\n" +
+            "                 on rc.predefined_response_id = pr.id\n" +
+            "    where\n" +
+            "          rc.created_date_time BETWEEN :start AND :end\n" +
+            "          AND pr.question_id = :questionId\n" +
+            "    GROUP BY\n" +
+            "             pr.id,\n" +
+            "             pr.description\n" +
+            "    ORDER BY pr.id", nativeQuery = true)
+    List<WrappedPredefinedResponseInterface> getSumBetweenDatesByQuestion(@Param("questionId") Long questionId, @Param("start") Date start, @Param("end") Date end);
 }

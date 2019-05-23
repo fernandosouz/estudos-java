@@ -1,11 +1,9 @@
 package feedbacksystem.com.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import feedbacksystem.com.demo.model.utils.AbstractModel;
-import lombok.Data;
+import feedbacksystem.com.demo.model.utils.AbstractEntity;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,7 +11,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class PredefinedResponse extends AbstractModel {
+public class PredefinedResponse extends AbstractEntity {
 
     private String description;
 
