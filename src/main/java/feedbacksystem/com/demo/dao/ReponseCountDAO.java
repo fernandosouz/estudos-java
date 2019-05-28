@@ -1,17 +1,13 @@
 package feedbacksystem.com.demo.dao;
 
-import feedbacksystem.com.demo.model.PredefinedResponse;
 import feedbacksystem.com.demo.model.ResponseCount;
 import feedbacksystem.com.demo.repository.PredefinedResponseRepository;
 import feedbacksystem.com.demo.repository.ResponseCountRepository;
 import org.springframework.stereotype.Component;
 
-import javax.swing.text.html.Option;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Optional;
 import java.util.function.BiPredicate;
-import java.util.function.Predicate;
 
 @Component
 public class ReponseCountDAO {
@@ -24,25 +20,25 @@ public class ReponseCountDAO {
         this.predefinedResponseRepository = predefinedResponseRepository;
     }
 
-    public boolean addOneToPredefinedResponse(Long idPredefinedResponse){
-       Optional<ResponseCount> optionalResponseCount = getResponseCountOfCurrentDayByPredefinedQuestion(idPredefinedResponse);
+    public void addOneToPredefinedResponse(Long idPredefinedResponse){
+       Optional<ResponseCount> optionalResponseCount = getResponseCountOfCurrentDayByPredefinedResponse(idPredefinedResponse);
 
         if(optionalResponseCount.isPresent()){
-            //add
+            optionalResponseCount.get().setCount(optionalResponseCount.get().getCount() + 1);
+            responseCountRepository.save(optionalResponseCount.get());
         }else{
-            //not add
+            ResponseCount responseCount = ResponseCount.builder().count(1L).build();
+            responseCountRepository.save(responseCount);
         }
-
-        return true;
     }
 
 
-    public Optional<ResponseCount> getResponseCountOfCurrentDayByPredefinedQuestion(Long predefinedQuestionId){
+    public Optional<ResponseCount> getResponseCountOfCurrentDayByPredefinedResponse(Long predefinedResponseId){
         ResponseCount responseCount = responseCountRepository.findLastOneByIdOfPredefinedQuestion(1L);
         LocalDateTime rightNow = LocalDateTime.now();
 
         BiPredicate<LocalDateTime, LocalDateTime> isTheSameDate = (date1, date2) ->
-                date2.getDayOfMonth() == date1.getDayOfMonth() &&
+                        date2.getDayOfMonth() == date1.getDayOfMonth() &&
                         date2.getDayOfMonth() == date1.getDayOfMonth() &&
                         date2.getYear() == date1.getYear();
 

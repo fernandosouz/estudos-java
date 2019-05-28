@@ -21,6 +21,7 @@ public interface ResponseCountRepository extends CrudRepository<ResponseCount, L
     @Query("DELETE FROM MyClass mtc WHERE YEAR(mtc.fecha)=?1 AND MONTH(mtc.fecha)=?2 AND DAY(mtc.fecha)=?3")
     public void deleteByFecha(Integer year, Integer month, Integer day);*/
 
+   //TODO quando der trocar o where para data
     @Query(value="SELECT rc.* FROM response_count rc WHERE rc.predefined_response_id=:id  ORDER BY id DESC LIMIT 1", nativeQuery = true)
     ResponseCount findLastOneByIdOfPredefinedQuestion(@Param("id") Long id);
 
