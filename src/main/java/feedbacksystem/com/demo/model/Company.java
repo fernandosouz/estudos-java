@@ -1,7 +1,7 @@
 package feedbacksystem.com.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import feedbacksystem.com.demo.model.utils.AbstractModel;
+import feedbacksystem.com.demo.model.utils.AbstractEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Company extends AbstractModel {
+public class Company extends AbstractEntity {
 
     private String name;
 
