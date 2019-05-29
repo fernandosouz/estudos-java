@@ -24,4 +24,12 @@ public class ResponseCount extends AbstractEntity {
     @JsonIgnoreProperties(value = {"responseCount"})
     private PredefinedResponse predefinedResponse;
 
+
+    public ResponseCount() {
+    }
+
+    public ResponseCount(Long count, PredefinedResponse predefinedResponse) {
+        this.count = count;
+        this.predefinedResponse = predefinedResponse;
+    }
 }

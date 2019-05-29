@@ -11,6 +11,6 @@ import java.util.List;
 public class WrapperQuestion {
 
     private String description;
-    private List<WrappedPredefinedResponseInterface> wrappedPredefinedResponsInterfaces;
+    private List<WrappedPredefinedResponseInterface> wrappedPredefinedResponse;
 
 }

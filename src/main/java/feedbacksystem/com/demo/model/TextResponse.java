@@ -15,6 +15,7 @@ public class TextResponse extends AbstractEntity {
     @JoinColumn(name = "question_id", referencedColumnName = "id")
     private Question question;
 
+    private String answer;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "identification_id")

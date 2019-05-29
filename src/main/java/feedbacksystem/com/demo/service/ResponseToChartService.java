@@ -37,7 +37,7 @@ public class ResponseToChartService {
             WrapperQuestion wrapperQuestion = new WrapperQuestion();
             wrapperQuestion.setDescription(question.getDescription());
             List<WrappedPredefinedResponseInterface> wrappedPredefinedResponseInterface = responseCountRepository.getSumBetweenDatesByQuestion(question.getId(), start, end);
-            wrapperQuestion.setWrappedPredefinedResponsInterfaces(wrappedPredefinedResponseInterface);
+            wrapperQuestion.setWrappedPredefinedResponse(wrappedPredefinedResponseInterface);
             return wrapperQuestion;
         }).collect(Collectors.toList());
     }

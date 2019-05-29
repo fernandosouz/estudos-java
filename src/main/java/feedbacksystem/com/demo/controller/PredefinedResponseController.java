@@ -7,8 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import javax.websocket.server.PathParam;
 
 @Controller
 public class PredefinedResponseController {
@@ -27,9 +30,10 @@ public class PredefinedResponseController {
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/predefined-response-add-one")
-    public ResponseEntity add() {
-        reponseCountDAO.addOneToPredefinedResponse(1L);
+    //TODO Otimizar a query removendo o for, e fazendo update de count+1 diretamente na query
+    @GetMapping(value = "/predefined-response-add-one/{id}")
+    public ResponseEntity add(@PathVariable("id") Long id) {
+        reponseCountDAO.addOneCountToPredefinedResponse(id);
         return new ResponseEntity(HttpStatus.CREATED);
     }
 }
