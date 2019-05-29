@@ -26,9 +26,9 @@ public class QuestionController {
     }
 
     //TODO Adicionar um filtro para empresas (4)
-    @GetMapping()
-    public ResponseEntity get(){
-        return new ResponseEntity(questionRepository.findAll(), HttpStatus.OK);
+    @GetMapping("/{id}")
+    public ResponseEntity get(@PathVariable Long id){
+        return new ResponseEntity(questionRepository.findAllByCompanyId(id), HttpStatus.OK);
     }
 
 }
