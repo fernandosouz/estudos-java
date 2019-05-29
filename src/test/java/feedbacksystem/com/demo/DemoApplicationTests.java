@@ -12,4 +12,9 @@ public class DemoApplicationTests {
 		Assert.assertTrue(true);
 	}
 
+	@Test
+	public void contextLoads2() {
+		Assert.assertTrue(true);
+	}
+
 }
