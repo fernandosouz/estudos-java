@@ -15,6 +15,12 @@ public interface QuestionRepository extends CrudRepository<Question,Long> {
     @Query(value="SELECT q.* FROM question q WHERE q.company_id=:id", nativeQuery = true)
     List<Question> findAllByCompanyId(@Param("id") Long id);
 
+    @Query(value="SELECT q.* FROM question q " +
+            "   WHERE q.id IN :idList      " +
+            "   AND   q.question_type = 1   "
+            , nativeQuery = true)
+    List<Question> findAllByType(@Param("idList") List<Long> idList);
+
 
 
 }

@@ -6,6 +6,7 @@ import feedbacksystem.com.demo.model.responses.chart.WrapperQuestion;
 import feedbacksystem.com.demo.repository.QuestionRepository;
 import feedbacksystem.com.demo.repository.ResponseCountRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,7 +28,7 @@ public class ResponseToChartService {
 
     public List<WrapperQuestion> getQuestionWrappedWithCountOfPredefinedResponseSumBetweenDates(List<Long> idsQuestions, String startDate, String endDate) throws ParseException {
         List<Question> questionList = new ArrayList<>();
-        questionRepository.findAllById(idsQuestions).forEach(questionList::add);
+        questionRepository.findAllByType(idsQuestions).forEach(questionList::add);
 
         Date start = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
         /*TODO ver outra forma de adicionar um à data final*/

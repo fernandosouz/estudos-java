@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class getDatasToChartRequest {
+public class    GetDatasToChartRequest {
     private List<Long> idsQuestions;
     private String startDate;
     private String endDate;

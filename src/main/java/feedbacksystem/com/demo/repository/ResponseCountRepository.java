@@ -22,10 +22,14 @@ public interface ResponseCountRepository extends CrudRepository<ResponseCount, L
             "         response_count AS rc\n" +
             "    INNER JOIN\n" +
             "             predefined_response AS pr\n" +
-            "                 on rc.predefined_response_id = pr.id\n" +
+            "                 on rc.predefined_response_id = pr.id\n"
+            +"    INNER JOIN\n" +
+            "             question AS q\n" +
+            "                 on q.id = pr.question_id\n" +
             "    where\n" +
             "          rc.created_date_time BETWEEN :start AND :end\n" +
             "          AND pr.question_id = :questionId\n" +
+            "          AND q.question_type = 1\n" +
             "    GROUP BY\n" +
             "             pr.id,\n" +
             "             pr.description\n" +
