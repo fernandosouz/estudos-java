@@ -14,6 +14,8 @@ import java.util.List;
 @Setter
 public class Question extends AbstractEntity {
 
+    public Question() {}
+
     private String description;
 
     @ManyToOne

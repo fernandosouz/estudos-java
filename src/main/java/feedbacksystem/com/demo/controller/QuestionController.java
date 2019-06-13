@@ -7,6 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.ws.Response;
+import java.util.Optional;
+import java.util.Set;
+
 
 @Controller
 @CrossOrigin(origins = "*")
@@ -31,4 +35,42 @@ public class QuestionController {
         return new ResponseEntity(questionRepository.findAllByCompanyId(id), HttpStatus.OK);
     }
 
+
+    @PostMapping("/add_list")
+    public ResponseEntity addNewQuestionsList(@RequestBody Set<Question> questionSet) {
+        if(questionSet.size() > 0) {
+            try {
+                questionRepository.saveAll(questionSet);
+                return new ResponseEntity(HttpStatus.OK);
+            } catch (Exception e) {
+                return new ResponseEntity(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+        return null;
+    }
+
+    @PutMapping()
+    public ResponseEntity updateQuestion(Question question) {
+        if(question != null) {
+            try{
+                questionRepository.save(question);
+                return new ResponseEntity(HttpStatus.OK);
+            }catch (Exception e){
+                return new ResponseEntity(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+        return null;
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletQuestion (@PathVariable("id") Long questionId) {
+        Optional<Question> responseQuestion = questionRepository.findById(questionId);
+        try{
+            // TODO colocar um campo deleted = false na classe commomn
+//        responseQuestion.setDeleted(true);
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }catch (Exception e){
+            return new ResponseEntity(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
