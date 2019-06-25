@@ -2,6 +2,7 @@ package feedbacksystem.com.demo.controller;
 
 import feedbacksystem.com.demo.model.TextResponse;
 import feedbacksystem.com.demo.repository.TextResponseRepository;
+import org.jboss.logging.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,8 @@ import java.util.List;
 public class TextResponseController {
 
     private TextResponseRepository textResponseRepository;
+
+    public TextResponseController() {}
 
     public TextResponseController(TextResponseRepository textResponseRepository) {
         this.textResponseRepository = textResponseRepository;
@@ -32,20 +35,18 @@ public class TextResponseController {
     }
 
 
-    @GetMapping("/{id}")
-    public ResponseEntity getTextResponseFromQuestionsList(@PathVariable("id") Long companyId, List<Date> dates){
-       if(dates.size() > 0) {
-           Date start = dates.get(0);
-           Date end = dates.get(1);
-           if(start != null && end != null) {
-               try {
-                   textResponseRepository.getTextResponseForQuestionsListByCompanyIdBetweenDates(companyId, start, end);
-                   return new ResponseEntity(HttpStatus.OK);
-               } catch (Exception e) {
-                   return new ResponseEntity(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
-               }
-           }
-       }
-       return null;
+    @GetMapping("/{id}/{start}/{end}")
+    public ResponseEntity getTextResponseFromQuestionsList(@PathVariable("id") Long companyId,
+                                                           @PathVariable("start") Date start,
+                                                           @PathVariable("end") Date end){
+        if(start != null && end != null && companyId != null) {
+            try {
+                textResponseRepository.getTextResponseForQuestionsListByCompanyIdBetweenDates(companyId, start, end);
+                return new ResponseEntity(HttpStatus.OK);
+            } catch (Exception e) {
+                return new ResponseEntity(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+        return null;
     }
 }
