@@ -4,10 +4,12 @@ import feedbacksystem.com.demo.model.TextResponse;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import javax.websocket.server.PathParam;
 import java.util.Date;
 
+@Repository
 public interface TextResponseRepository extends CrudRepository<TextResponse, Long> {
 
 
@@ -21,7 +23,7 @@ public interface TextResponseRepository extends CrudRepository<TextResponse, Lon
                             "AND q.question_type = 2 " +
                             "AND tr.created_date_time BETWEEN :start AND :end ", nativeQuery = true)
     Long getTextResponseForQuestionsListByCompanyIdBetweenDates(
-            @Param("id") Long companyId,
+            @Param("companyId") Long companyId,
             @Param("start") Date start,
             @Param("end") Date end);
 }

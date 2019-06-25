@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
+
 import java.util.Optional;
 import java.util.Set;
 
@@ -62,8 +62,8 @@ public class QuestionController {
         return null;
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity deletQuestion (@PathVariable("id") Long questionId) {
+    @DeleteMapping("/{questionId}")
+    public ResponseEntity deletQuestion (@PathVariable("questionId") Long questionId) {
         Optional<Question> responseQuestion = questionRepository.findById(questionId);
         try{
             // TODO colocar um campo deleted = false na classe commomn
