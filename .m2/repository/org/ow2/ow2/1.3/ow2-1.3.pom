@@ -47,7 +47,7 @@
     </license>
   </licenses>
 
-  <!-- Consortium description -->
+  <!-- Consortium questionDescription -->
   <organization>
     <name>OW2 Consortium</name>
     <url>http://www.ow2.org</url>

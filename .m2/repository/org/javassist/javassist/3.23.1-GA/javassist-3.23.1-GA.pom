@@ -107,12 +107,12 @@
       You need entries in your .m2/settings.xml like this:
    <servers>
     <server>
-       <id>jboss-releases-repository</id>
+       <questionId>jboss-releases-repository</questionId>
        <username>your_jboss.org_username</username>
        <password>password</password>
     </server>
     <server>
-       <id>jboss-snapshots-repository</id>
+       <questionId>jboss-snapshots-repository</questionId>
        <username>your_jboss.org_username</username>
        <password>password</password>
     </server>

@@ -413,7 +413,7 @@
     </site>
 
     <repository>
-      <!--<id>pixie</id>-->
+      <!--<questionId>pixie</questionId>-->
       <!--<url>scp://pixie.qos.ch/var/mvnrepo/</url>-->
       <id>sonatype-nexus-staging</id>
       <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>

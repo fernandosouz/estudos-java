@@ -102,7 +102,7 @@
       </site>
       <!--
       <repository>
-        <id>default</id>
+        <questionId>default</questionId>
         <name>Apache Release Mirroring Distribution Repository</name>
         <url>scp://people.apache.org/www/www.apache.org/dist/velocity/tools/</url>
       </repository>

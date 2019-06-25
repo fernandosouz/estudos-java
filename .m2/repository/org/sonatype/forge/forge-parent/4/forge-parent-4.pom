@@ -209,7 +209,7 @@
             <artifactId>clirr-maven-plugin</artifactId>
             <executions>
               <execution>
-                <id>clirr-check</id>
+                <questionId>clirr-check</questionId>
                 <phase>package</phase>
                 <goals>
                   <goal>check</goal>

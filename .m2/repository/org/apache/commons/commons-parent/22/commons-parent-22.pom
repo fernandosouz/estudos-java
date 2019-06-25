@@ -40,7 +40,7 @@
   </ciManagement>
 
   <!--
-    Starting with version 22, the RAT plugin has changed Maven group and id, so any existing configuration
+    Starting with version 22, the RAT plugin has changed Maven group and questionId, so any existing configuration
     needs to be updated.
     To fix component POMs, please change any occurrences of:
         <groupId>org.codehaus.mojo</groupId>
@@ -57,7 +57,7 @@
    
     <distributionManagement>
       <site>
-        <id>apache.website</id>
+        <questionId>apache.website</questionId>
         <name>Apache Commons Site</name>
         <url>${commons.deployment.protocol}://people.apache.org/www/commons.apache.org/${commons.componentid}</url>
       </site>
@@ -180,7 +180,7 @@
     </testResources>
     <pluginManagement>
       <plugins>
-        <!-- org.apache.maven.plugins, alpha order by artifact id -->
+        <!-- org.apache.maven.plugins, alpha order by artifact questionId -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-antrun-plugin</artifactId>
@@ -320,7 +320,7 @@
       </plugins>
     </pluginManagement>
     <plugins>
-      <!-- org.apache.maven.plugins, alpha order by artifact id -->
+      <!-- org.apache.maven.plugins, alpha order by artifact questionId -->
       <plugin>
         <!--
           - Copy LICENSE.txt and NOTICE.txt so that they are included
@@ -457,7 +457,7 @@
     <!-- N.B. plugins defined here in the <reporting> section ignore what's defined in <pluginManagement>
          in the <build> section above, so we have to define the versions here. -->
     <plugins>
-      <!-- org.apache.maven.plugins, alpha order by artifact id -->
+      <!-- org.apache.maven.plugins, alpha order by artifact questionId -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
