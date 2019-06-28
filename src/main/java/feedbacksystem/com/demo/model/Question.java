@@ -28,7 +28,7 @@ public class Question extends AbstractEntity {
     @JsonIgnoreProperties(value = {"question"})
     private List<TextResponse> textResponseList;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.REFRESH, fetch= FetchType.LAZY)
     @JoinColumn(name = "question_id")
     @JsonIgnoreProperties(value = {"question"})
     private List<PredefinedResponse> predefinedResponses;

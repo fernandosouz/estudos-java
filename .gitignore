@@ -16,6 +16,7 @@ target/
 *.iml
 *.ipr
 *.attach_pid*
+./m2
 
 ### NetBeans ###
 nbproject/private/
