@@ -26,7 +26,7 @@ public class QuestionController {
     @PostMapping()
     public ResponseEntity add(@RequestBody Question question) {
             question.merge();
-            questionRepository.save(question);
+                questionRepository.save(question);
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
