@@ -25,12 +25,18 @@ public class QuestionController {
 
     @PostMapping()
     public ResponseEntity add(@RequestBody Question question) {
+            question.merge();
             questionRepository.save(question);
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity getById(@PathVariable Long id){
+        return new ResponseEntity(questionRepository.findById(id), HttpStatus.OK);
+    }
+
     //TODO Adicionar um filtro para empresas (4)
-    @GetMapping("/{companyId}")
+    @GetMapping("/company/{companyId}")
     public ResponseEntity get(@PathVariable Long companyId){
         return new ResponseEntity(questionRepository.findAllByCompanyId(companyId), HttpStatus.OK);
     }

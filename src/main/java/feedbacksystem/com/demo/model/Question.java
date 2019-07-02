@@ -28,14 +28,12 @@ public class Question extends AbstractEntity {
     @JsonIgnoreProperties(value = {"question"})
     private List<TextResponse> textResponseList;
 
-    @OneToMany(cascade = CascadeType.REFRESH, fetch= FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
     @JoinColumn(name = "question_id")
     @JsonIgnoreProperties(value = {"question"})
     private List<PredefinedResponse> predefinedResponses;
 
-
     private Integer questionType;
-
 
     public QuestionsTypes getQuestionType() {
         return QuestionsTypes.toEnum(questionType);
@@ -43,5 +41,9 @@ public class Question extends AbstractEntity {
 
     public void setQuestionType(Integer questionType) {
         this.questionType = questionType;
+    }
+
+    public void merge(){
+        this.getPredefinedResponses().forEach(predefinedResponse -> predefinedResponse.setQuestion(this));
     }
 }

@@ -15,7 +15,7 @@ public class PredefinedResponse extends AbstractEntity {
 
     private String description;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE}, fetch= FetchType.LAZY)
     @JoinColumn(name = "question_id", referencedColumnName = "id")
     @JsonIgnoreProperties(value = {"predefinedResponses"})
     private Question question;
