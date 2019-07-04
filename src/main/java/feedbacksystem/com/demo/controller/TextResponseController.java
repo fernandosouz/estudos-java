@@ -1,15 +1,23 @@
 package feedbacksystem.com.demo.controller;
 
 import feedbacksystem.com.demo.model.TextResponse;
+import feedbacksystem.com.demo.model.responses.textresponse.QuestionWithTextResponse;
+import feedbacksystem.com.demo.model.responses.textresponse.TextResponseWithDate;
+import feedbacksystem.com.demo.model.responses.textresponse.TextResponseWithQuestion;
+import feedbacksystem.com.demo.repository.QuestionRepository;
 import feedbacksystem.com.demo.repository.TextResponseRepository;
-import org.jboss.logging.Param;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @CrossOrigin(origins = "*")
@@ -17,11 +25,12 @@ import java.util.List;
 public class TextResponseController {
 
     private TextResponseRepository textResponseRepository;
+    private QuestionRepository questionRespository;
 
-    public TextResponseController() {}
-
-    public TextResponseController(TextResponseRepository textResponseRepository) {
+    public TextResponseController(TextResponseRepository textResponseRepository,
+                                    QuestionRepository questionRepository) {
         this.textResponseRepository = textResponseRepository;
+        this.questionRespository = questionRepository;
     }
 
     @PostMapping
@@ -36,17 +45,54 @@ public class TextResponseController {
 
 
     @GetMapping("/{id}/{start}/{end}")
-    public ResponseEntity getTextResponseFromQuestionsList(@PathVariable("id") Long companyId,
-                                                           @PathVariable("start") Date start,
-                                                           @PathVariable("end") Date end){
+    public ResponseEntity getTextResponseFromQuestionsList(@PathVariable("id") Long companyId, @PathVariable("start") String start, @PathVariable("end") String end){
         if(start != null && end != null && companyId != null) {
             try {
-                textResponseRepository.getTextResponseForQuestionsListByCompanyIdBetweenDates(companyId, start, end);
-                return new ResponseEntity(HttpStatus.OK);
+                Date startConverted = new SimpleDateFormat("yyyy-MM-dd").parse(start);
+                /*TODO ver outra forma de adicionar um à data final*/
+                Date endConverted = new Date(new SimpleDateFormat("yyyy-MM-dd").parse(end).getTime() + (1000 * 60 * 60 * 24));
+
+                List<QuestionWithTextResponse> questionListResponse = new ArrayList<>();
+
+                List<TextResponseWithQuestion> responseWithQuestions = questionRespository.getQuestionToTextResponse(companyId, startConverted, endConverted);
+
+                responseWithQuestions.stream().forEach(textResponseWithQuestion -> {
+                    if(doNotContainInListResponse(questionListResponse, textResponseWithQuestion)){
+                        QuestionWithTextResponse questionWithTextResponse = QuestionWithTextResponse
+                                .builder()
+                                .questionId(textResponseWithQuestion.getquestionId())
+                                .description(textResponseWithQuestion.getquestionDescription())
+                                .textResponseWithDates(setListInsideWithAllQuestionId(responseWithQuestions, textResponseWithQuestion))
+                                .build();
+
+                        questionListResponse.add(questionWithTextResponse);
+                    }
+                });
+
+                return new ResponseEntity(questionListResponse, HttpStatus.OK);
             } catch (Exception e) {
                 return new ResponseEntity(e.getStackTrace(), HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
         return null;
+    }
+
+    private List<TextResponseWithDate> setListInsideWithAllQuestionId(List<TextResponseWithQuestion> responseWithQuestions, TextResponseWithQuestion textResponseWithQuestion) {
+        return responseWithQuestions.stream()
+        .filter(item -> item.getquestionId().equals(textResponseWithQuestion.getquestionId()))
+        .map(item -> {
+            TextResponseWithDate textResponseWithDate = new TextResponseWithDate();
+            textResponseWithDate.setAnswer(item.gettextResponseDescription());
+            textResponseWithDate.setDate(
+                    StringUtils.leftPad(Integer.toString(item.gettextResponseDate().getDayOfMonth()), 2, "0") + "-" +
+                    StringUtils.leftPad(Integer.toString(item.gettextResponseDate().getMonthValue()), 2, "0") + "-" +
+                            item.gettextResponseDate().getYear());
+            return textResponseWithDate;
+        })
+        .collect(Collectors.toList());
+    }
+
+    private boolean doNotContainInListResponse(List<QuestionWithTextResponse> questionWithTextResponsesWrapped, TextResponseWithQuestion textResponseWithQuestion) {
+        return !questionWithTextResponsesWrapped.stream().anyMatch(item -> item.getQuestionId().equals(textResponseWithQuestion.getquestionId()));
     }
 }
