@@ -10,5 +10,5 @@ import java.util.List;
 public class QuestionWithTextResponse {
     Long questionId;
     String description;
-    List<TextResponseWithDate> textResponseWithDates;
+    List<TextResponseWithDate> textResponseWithDateList;
 }

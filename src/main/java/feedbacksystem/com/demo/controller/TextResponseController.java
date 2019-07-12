@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -48,21 +47,24 @@ public class TextResponseController {
     public ResponseEntity getTextResponseFromQuestionsList(@PathVariable("id") Long companyId, @PathVariable("start") String start, @PathVariable("end") String end){
         if(start != null && end != null && companyId != null) {
             try {
-                Date startConverted = new SimpleDateFormat("yyyy-MM-dd").parse(start);
+                Date startDateConverted = new SimpleDateFormat("yyyy-MM-dd").parse(start);
                 /*TODO ver outra forma de adicionar um à data final*/
-                Date endConverted = new Date(new SimpleDateFormat("yyyy-MM-dd").parse(end).getTime() + (1000 * 60 * 60 * 24));
+                Date endDateConverted = new Date(new SimpleDateFormat("yyyy-MM-dd").parse(end).getTime() + (1000 * 60 * 60 * 24));
 
                 List<QuestionWithTextResponse> questionListResponse = new ArrayList<>();
 
-                List<TextResponseWithQuestion> responseWithQuestions = questionRespository.getQuestionToTextResponse(companyId, startConverted, endConverted);
+                List<TextResponseWithQuestion> responseWithQuestions = questionRespository.getQuestionToTextResponse(companyId, startDateConverted, endDateConverted);
 
-                responseWithQuestions.stream().forEach(textResponseWithQuestion -> {
+                responseWithQuestions.forEach(textResponseWithQuestion -> {
                     if(doNotContainInListResponse(questionListResponse, textResponseWithQuestion)){
+
+                        List<TextResponseWithQuestion> listFilteredByQuestionId = responseWithQuestions.stream().filter(item -> item.getquestionId().equals(textResponseWithQuestion.getquestionId())).collect(Collectors.toList());
+
                         QuestionWithTextResponse questionWithTextResponse = QuestionWithTextResponse
                                 .builder()
                                 .questionId(textResponseWithQuestion.getquestionId())
                                 .description(textResponseWithQuestion.getquestionDescription())
-                                .textResponseWithDates(setListInsideWithAllQuestionId(responseWithQuestions, textResponseWithQuestion))
+                                .textResponseWithDateList(setListInsideWithAllQuestionId(listFilteredByQuestionId))
                                 .build();
 
                         questionListResponse.add(questionWithTextResponse);
@@ -77,19 +79,20 @@ public class TextResponseController {
         return null;
     }
 
-    private List<TextResponseWithDate> setListInsideWithAllQuestionId(List<TextResponseWithQuestion> responseWithQuestions, TextResponseWithQuestion textResponseWithQuestion) {
+    private List<TextResponseWithDate> setListInsideWithAllQuestionId(List<TextResponseWithQuestion> responseWithQuestions) {
         return responseWithQuestions.stream()
-        .filter(item -> item.getquestionId().equals(textResponseWithQuestion.getquestionId()))
-        .map(item -> {
-            TextResponseWithDate textResponseWithDate = new TextResponseWithDate();
-            textResponseWithDate.setAnswer(item.gettextResponseDescription());
-            textResponseWithDate.setDate(
-                    StringUtils.leftPad(Integer.toString(item.gettextResponseDate().getDayOfMonth()), 2, "0") + "-" +
-                    StringUtils.leftPad(Integer.toString(item.gettextResponseDate().getMonthValue()), 2, "0") + "-" +
-                            item.gettextResponseDate().getYear());
-            return textResponseWithDate;
-        })
-        .collect(Collectors.toList());
+                                    .map(item -> TextResponseWithDate
+                                            .builder()
+                                            .answer(item.gettextResponseDescription())
+                                            .date(dateToString(item))
+                                            .build()
+                                    ).collect(Collectors.toList());
+    }
+
+    private String dateToString(TextResponseWithQuestion item) {
+        return StringUtils.leftPad(Integer.toString(item.gettextResponseDate().getDayOfMonth()), 2, "0") + "-" +
+        StringUtils.leftPad(Integer.toString(item.gettextResponseDate().getMonthValue()), 2, "0") + "-" +
+        item.gettextResponseDate().getYear();
     }
 
     private boolean doNotContainInListResponse(List<QuestionWithTextResponse> questionWithTextResponsesWrapped, TextResponseWithQuestion textResponseWithQuestion) {
