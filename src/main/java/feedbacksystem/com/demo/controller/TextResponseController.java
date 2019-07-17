@@ -18,7 +18,6 @@ public class TextResponseController {
 
     private TextResponseRepository textResponseRepository;
 
-    public TextResponseController() {}
 
     public TextResponseController(TextResponseRepository textResponseRepository) {
         this.textResponseRepository = textResponseRepository;
