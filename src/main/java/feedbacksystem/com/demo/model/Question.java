@@ -35,6 +35,9 @@ public class Question extends AbstractEntity {
 
     private Integer questionType;
 
+    private Boolean showOnDashBoard;
+    private Boolean showOnFeedBackApp;
+
     public QuestionsTypes getQuestionType() {
         return QuestionsTypes.toEnum(questionType);
     }
