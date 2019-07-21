@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Setter
 public class TextResponse extends AbstractEntity {
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE}, fetch= FetchType.LAZY)
     @JoinColumn(name = "question_id", referencedColumnName = "id")
     @JsonIgnoreProperties(value = {"TextResponse"})
     private Question question;

@@ -23,7 +23,7 @@ public class Question extends AbstractEntity {
     @JsonIgnoreProperties(value = {"questionList"})
     private Company company;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.DETACH, fetch= FetchType.LAZY)
     @JoinColumn(name = "question_id")
     @JsonIgnoreProperties(value = {"question"})
     private List<TextResponse> textResponseList;

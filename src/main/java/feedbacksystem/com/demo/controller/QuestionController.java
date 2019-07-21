@@ -41,6 +41,11 @@ public class QuestionController {
         return new ResponseEntity(questionRepository.findAllByCompanyId(companyId), HttpStatus.OK);
     }
 
+    @GetMapping("/company/app/{companyId}")
+    public ResponseEntity getToApp(@PathVariable Long companyId){
+        return new ResponseEntity(questionRepository.findAllByCompanyIdToApp(companyId), HttpStatus.OK);
+    }
+
 
     @PostMapping("/add_list")
     public ResponseEntity addNewQuestionsList(@RequestBody Set<Question> questionSet) {
