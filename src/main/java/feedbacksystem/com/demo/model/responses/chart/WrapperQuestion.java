@@ -10,7 +10,8 @@ import java.util.List;
 @Setter
 public class WrapperQuestion {
 
-    private String description;
+    private String questionDescription;
+    private Long questionId;
     private List<WrappedPredefinedResponseInterface> wrappedPredefinedResponse;
 
 }

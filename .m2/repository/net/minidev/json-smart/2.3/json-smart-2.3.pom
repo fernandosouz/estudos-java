@@ -95,7 +95,7 @@
 			<build>
 				<plugins>
 					<!-- Enable signing of the artifacts For gpg:sign-and-deploy-file it's 
-						necessary to have a <server> with the repositoryId provided or id="remote-repository" 
+						necessary to have a <server> with the repositoryId provided or questionId="remote-repository"
 						defined in settings.xml (it contains the repository's login, psw) Signing: 
 						mvn gpg:sign-and-deploy-file -DpomFile=target/myapp-1.0.pom -Dfile=target/myapp-1.0.jar 
 						-Durl=http://oss.sonatype.org/content/repositories/malyvelky/ -DrepositoryId=sonatype_oss 

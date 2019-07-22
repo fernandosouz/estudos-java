@@ -429,7 +429,7 @@
         <qdox.byaccj.executable>${basedir}/bootstrap/yacc.exe</qdox.byaccj.executable>
       </properties>
     </profile>
-    <!-- <profile> <id>release-site</id> <activation> <file> <exists>release.properties</exists> 
+    <!-- <profile> <questionId>release-site</questionId> <activation> <file> <exists>release.properties</exists>
       </file> </activation> <build> <filters> <filter>release.properties</filter> 
       </filters> </build> </profile> -->
   </profiles>

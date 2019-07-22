@@ -54,7 +54,7 @@
         <version>3.0.0-M2</version>
         <executions>
           <execution>
-            <id>enforce-maven</id>
+            <questionId>enforce-maven</questionId>
             <goals>
               <goal>enforce</goal>
             </goals>
@@ -162,7 +162,7 @@
             <goals>
               <goal>check</goal>
             </goals>
-            <id>check</id>
+            <questionId>check</questionId>
           </execution>
           -->
         </executions>

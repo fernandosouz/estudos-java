@@ -184,7 +184,7 @@
             </plugin>
             <plugin>
                 <!--
-                Updates Version#id().
+                Updates Version#questionId().
                 -->
                 <groupId>com.google.code.maven-replacer-plugin</groupId>
                 <artifactId>replacer</artifactId>

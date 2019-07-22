@@ -1,5 +1,6 @@
 package feedbacksystem.com.demo.repository;
 
+import feedbacksystem.com.demo.model.Question;
 import feedbacksystem.com.demo.model.TextResponse;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -25,6 +26,6 @@ public interface TextResponseRepository extends CrudRepository<TextResponse, Lon
     List<TextResponse> getTextResponseForQuestionsListByCompanyIdBetweenDates(
             @Param("companyId") Long companyId,
             @Param("start") Date start,
-            @Param("end") Date test);
+            @Param("end") Date end);
 
 }

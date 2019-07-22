@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
+
 import java.util.Optional;
 import java.util.Set;
 
@@ -25,14 +25,20 @@ public class QuestionController {
 
     @PostMapping()
     public ResponseEntity add(@RequestBody Question question) {
-        questionRepository.save(question);
+            question.merge();
+                questionRepository.save(question);
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
-    //TODO Adicionar um filtro para empresas (4)
     @GetMapping("/{id}")
-    public ResponseEntity get(@PathVariable Long id){
-        return new ResponseEntity(questionRepository.findAllByCompanyId(id), HttpStatus.OK);
+    public ResponseEntity getById(@PathVariable Long id){
+        return new ResponseEntity(questionRepository.findById(id), HttpStatus.OK);
+    }
+
+    //TODO Adicionar um filtro para empresas (4)
+    @GetMapping("/company/{companyId}")
+    public ResponseEntity get(@PathVariable Long companyId){
+        return new ResponseEntity(questionRepository.findAllByCompanyId(companyId), HttpStatus.OK);
     }
 
 
@@ -62,8 +68,8 @@ public class QuestionController {
         return null;
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity deletQuestion (@PathVariable("id") Long questionId) {
+    @DeleteMapping("/{questionId}")
+    public ResponseEntity deletQuestion (@PathVariable("questionId") Long questionId) {
         Optional<Question> responseQuestion = questionRepository.findById(questionId);
         try{
             // TODO colocar um campo deleted = false na classe commomn

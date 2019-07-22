@@ -61,7 +61,7 @@ Version 39:
     [See COMMONSSITE-69]
     If updating from a previous version, please check the property definitions
 
-    Starting with version 22, the RAT plugin has changed Maven group and id, so any existing configuration
+    Starting with version 22, the RAT plugin has changed Maven group and questionId, so any existing configuration
     needs to be updated.
     To fix component POMs, please change any occurrences of:
         <groupId>org.codehaus.mojo</groupId>
@@ -78,13 +78,13 @@ Version 39:
 
     <distributionManagement>
       <site>
-        <id>commons.site</id>
+        <questionId>commons.site</questionId>
         <name>Apache Commons Site SVN</name>
         <url>scm:svn:${commons.scmPubUrl}</url>
       </site>
     </distributionManagement>
 
-    Alternatively you can map the component's existing site id to the
+    Alternatively you can map the component's existing site questionId to the
     commons.scmPubServer property.
 
     Coverage tool selection
@@ -220,7 +220,7 @@ Version 39:
     </testResources>
     <pluginManagement>
       <plugins>
-        <!-- org.apache.maven.plugins, alpha order by artifact id -->
+        <!-- org.apache.maven.plugins, alpha order by artifact questionId -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-antrun-plugin</artifactId>
@@ -410,7 +410,7 @@ Version 39:
       </plugins>
     </pluginManagement>
     <plugins>
-      <!-- org.apache.maven.plugins, alpha order by artifact id -->
+      <!-- org.apache.maven.plugins, alpha order by artifact questionId -->
       <plugin>
           <!-- Parent POM is released, so needs source archive for ASF mirrors -->
         <artifactId>maven-assembly-plugin</artifactId>
@@ -604,7 +604,7 @@ Version 39:
     <!-- N.B. plugins defined here in the <reporting> section ignore what's defined in <pluginManagement>
          in the <build> section above, so we have to define the versions here. -->
     <plugins>
-      <!-- org.apache.maven.plugins, alpha order by artifact id -->
+      <!-- org.apache.maven.plugins, alpha order by artifact questionId -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-changes-plugin</artifactId>

@@ -239,7 +239,7 @@
       <url>https://repository.apache.org/content/repositories/releases/</url>
     </pluginRepository>
 <!--     <pluginRepository> -->
-<!--       <id>apache.snapshots</id> -->
+<!--       <questionId>apache.snapshots</questionId> -->
 <!--       <name>Apache snapshots repository</name> -->
 <!--       <url>http://repository.apache.org/content/groups/snapshots</url> -->
 <!--       <snapshots> -->
@@ -1139,7 +1139,7 @@
         <artifactId>cobertura-maven-plugin</artifactId>
         <executions>
           <execution>
-            <id>clean</id>
+            <questionId>clean</questionId>
             <goals>
               <goal>clean</goal>
             </goals>

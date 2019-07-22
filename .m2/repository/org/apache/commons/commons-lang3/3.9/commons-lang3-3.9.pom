@@ -22,12 +22,11 @@
   <parent>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-parent</artifactId>
-    <version>37</version>
+    <version>48</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.apache.commons</groupId>
   <artifactId>commons-lang3</artifactId>
-  <version>3.4</version>
+  <version>3.9</version>
   <name>Apache Commons Lang</name>
 
   <inceptionYear>2001</inceptionYear>
@@ -45,9 +44,10 @@
   </issueManagement>
 
   <scm>
-    <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/lang/tags/LANG_3_4</connection>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/lang/tags/LANG_3_4</developerConnection>
-    <url>http://svn.apache.org/viewvc/commons/proper/lang/tags/LANG_3_4</url>
+    <connection>scm:git:http://git-wip-us.apache.org/repos/asf/commons-lang.git</connection>
+    <developerConnection>scm:git:https://git-wip-us.apache.org/repos/asf/commons-lang.git</developerConnection>
+    <url>https://git-wip-us.apache.org/repos/asf?p=commons-lang.git</url>
+    <tag>commons-lang-3.9</tag>
   </scm>
 
   <developers>
@@ -178,6 +178,24 @@
       <id>djones</id>
       <email>djones@apache.org</email>
       <timezone>0</timezone>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>Loic Guibert</name>
+      <id>lguibert</id>
+      <email>lguibert@apache.org</email>
+      <timezone>+4</timezone>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>Rob Tompkins</name>
+      <id>chtompki</id>
+      <email>chtompki@apache.org</email>
+      <timezone>-5</timezone>
       <roles>
         <role>Java Developer</role>
       </roles>
@@ -478,36 +496,60 @@
     <contributor>
       <name>Michał Kordas</name>
     </contributor>
+    <contributor>
+      <name>Felipe Adorno</name>
+    </contributor>
+    <contributor>
+      <name>Adrian Ber</name>
+    </contributor>
+    <contributor>
+      <name>Mark Dacek</name>
+    </contributor>
   </contributors>
 
   <!-- Lang should depend on very little -->
   <dependencies>
+    <!-- testing -->
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.4.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit-pioneer</groupId>
+      <artifactId>junit-pioneer</artifactId>
+      <version>0.3.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.hamcrest</groupId>
-      <artifactId>hamcrest-all</artifactId>
-      <version>1.3</version>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>commons-io</groupId>
-      <artifactId>commons-io</artifactId>
-      <version>2.4</version>
+      <artifactId>hamcrest</artifactId>
+      <version>2.1</version>
       <scope>test</scope>
     </dependency>
 
     <dependency>
       <groupId>org.easymock</groupId>
       <artifactId>easymock</artifactId>
-      <version>3.3.1</version>
+      <version>4.0.2</version>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>org.openjdk.jmh</groupId>
+      <artifactId>jmh-core</artifactId>
+      <version>${jmh.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.openjdk.jmh</groupId>
+      <artifactId>jmh-generator-annprocess</artifactId>
+      <version>${jmh.version}</version>
+      <scope>test</scope>
+    </dependency>
+
   </dependencies>
 
   <distributionManagement>
@@ -519,10 +561,11 @@
   </distributionManagement>
 
   <properties>
+    <argLine>-Xmx512m</argLine>
     <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <maven.compiler.source>1.6</maven.compiler.source>
-    <maven.compiler.target>1.6</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
     <!--
        This is also  used to generate download_xxx file name.
        To override this when generating the download page:
@@ -531,11 +574,15 @@
 
        The above seems to change the download page name but not any other
        properties that depend on the componentid.
+
+       N.B. The componentid is also used by the parent pom as part of the OSGI symbolic name.
     -->
-    <commons.componentid>lang3</commons.componentid>
+    <commons.componentid>lang</commons.componentid>
+    <commons.packageId>lang3</commons.packageId>
+    <commons.module.name>org.apache.commons.lang3</commons.module.name>
     <!-- Current 3.x release series -->
-    <commons.release.version>3.4</commons.release.version>
-    <commons.release.desc>(Java 6.0+)</commons.release.desc>
+    <commons.release.version>3.9</commons.release.version>
+    <commons.release.desc>(Java 8+)</commons.release.desc>
     <!-- Previous 2.x release series -->
     <commons.release.2.version>2.6</commons.release.2.version>
     <commons.release.2.desc>(Requires Java 1.2 or later)</commons.release.2.desc>
@@ -547,10 +594,62 @@
     <commons.site.path>lang</commons.site.path>
     <commons.scmPubUrl>https://svn.apache.org/repos/infra/websites/production/commons/content/proper/commons-lang</commons.scmPubUrl>
     <commons.scmPubCheckoutDirectory>site-content</commons.scmPubCheckoutDirectory>
+    <commons.encoding>utf-8</commons.encoding>
+
+    <checkstyle.plugin.version>3.0.0</checkstyle.plugin.version>
+    <checkstyle.version>8.18</checkstyle.version>
+
+    <spotbugs.plugin.version>3.1.11</spotbugs.plugin.version>
+    <japicmp.skip>false</japicmp.skip>
+
+    <!-- JMH Benchmark related properties, version, target compiler and name of the benchmarking uber jar. -->
+    <jmh.version>1.21</jmh.version>
+    <uberjar.name>benchmarks</uberjar.name>
+
+    <commons.jacoco.version>0.8.3</commons.jacoco.version>
+    <commons.surefire.version>3.0.0-M3</commons.surefire.version>
+
+    <!-- generate report even if there are binary incompatible changes -->
+    <commons.japicmp.breakBuildOnBinaryIncompatibleModifications>false</commons.japicmp.breakBuildOnBinaryIncompatibleModifications>
+    <commons.japicmp.version>0.13.1</commons.japicmp.version>
+
+    <!-- Commons Release Plugin -->
+    <commons.bc.version>3.8.1</commons.bc.version>
+    <commons.rc.version>RC2</commons.rc.version>
+    <commons.release.isDistModule>true</commons.release.isDistModule>
+    <commons.distSvnStagingUrl>scm:svn:https://dist.apache.org/repos/dist/dev/commons/lang</commons.distSvnStagingUrl>
+    <commons.releaseManagerName>Rob Tompkins</commons.releaseManagerName>
+    <commons.releaseManagerKey>B6E73D84EA4FCC47166087253FAAD2CD5ECBB314</commons.releaseManagerKey>
   </properties>
 
 
   <build>
+   <defaultGoal>clean verify apache-rat:check clirr:check checkstyle:check spotbugs:check javadoc:javadoc</defaultGoal>
+   <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.rat</groupId>
+          <artifactId>apache-rat-plugin</artifactId>
+          <configuration>
+            <excludes>
+              <exclude>site-content/**</exclude>
+              <exclude>src/site/resources/.htaccess</exclude>
+              <exclude>src/site/resources/download_lang.cgi</exclude>
+              <exclude>src/site/resources/release-notes/RELEASE-NOTES-*.txt</exclude>
+              <exclude>src/test/resources/lang-708-input.txt</exclude>
+            </excludes>
+          </configuration>
+        </plugin>
+        <!-- override skip property of parent pom -->
+        <plugin>
+          <groupId>com.github.siom79.japicmp</groupId>
+          <artifactId>japicmp-maven-plugin</artifactId>
+          <configuration>
+            <skip>false</skip>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -565,7 +664,7 @@
               <runOrder>random</runOrder>
             </configuration>
           </execution>
-          <!-- <execution> <questionId>security-manager-test</questionId> <phase>integration-test</phase> <goals> <goal>test</goal> </goals> <configuration>
+          <!-- <execution> <id>security-manager-test</id> <phase>integration-test</phase> <goals> <goal>test</goal> </goals> <configuration>
             <includes> <include>**/*Test.java</include> </includes> <argLine>-Djava.security.manager -Djava.security.policy=${basedir}/src/test/resources/java.policy</argLine>
             </configuration> </execution> -->
         </executions>
@@ -590,6 +689,13 @@
             </goals>
           </execution>
         </executions>
+        <configuration>
+          <archive combine.children="append">
+            <manifestEntries>
+              <Automatic-Module-Name>${commons.module.name}</Automatic-Module-Name>
+            </manifestEntries>
+          </archive>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -600,6 +706,30 @@
           </ignorePathsToDelete>
         </configuration>
       </plugin>
+      <plugin>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>${checkstyle.plugin.version}</version>
+        <configuration>
+          <configLocation>${basedir}/checkstyle.xml</configLocation>
+          <includeTestSourceDirectory>true</includeTestSourceDirectory>
+          <enableRulesSummary>false</enableRulesSummary>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>com.puppycrawl.tools</groupId>
+            <artifactId>checkstyle</artifactId>
+            <version>${checkstyle.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>${spotbugs.plugin.version}</version>
+        <configuration>
+          <excludeFilterFile>${basedir}/spotbugs-exclude-filter.xml</excludeFilterFile>
+        </configuration>
+      </plugin>
     </plugins>
 
   </build>
@@ -608,9 +738,10 @@
     <plugins>
       <plugin>
         <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>2.15</version>
+        <version>${checkstyle.plugin.version}</version>
         <configuration>
           <configLocation>${basedir}/checkstyle.xml</configLocation>
+          <includeTestSourceDirectory>true</includeTestSourceDirectory>
           <enableRulesSummary>false</enableRulesSummary>
         </configuration>
         <reportSets>
@@ -623,36 +754,19 @@
       </plugin>
       <!-- Requires setting 'export MAVEN_OPTS="-Xmx512m -XX:MaxPermSize=128m" ' -->
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>findbugs-maven-plugin</artifactId>
-        <!-- Use version from parent pom as that is adjusted according to the Java version used to run Maven -->
-        <version>${commons.findbugs.version}</version>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>${spotbugs.plugin.version}</version>
         <configuration>
-          <excludeFilterFile>${basedir}/findbugs-exclude-filter.xml</excludeFilterFile>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>clirr-maven-plugin</artifactId>
-        <version>2.6.1</version>
-        <configuration>
-          <minSeverity>info</minSeverity>
+          <excludeFilterFile>${basedir}/spotbugs-exclude-filter.xml</excludeFilterFile>
         </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-pmd-plugin</artifactId>
-        <version>3.4</version>
+        <version>3.11.0</version>
         <configuration>
           <targetJdk>${maven.compiler.target}</targetJdk>
         </configuration>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>pmd</report>
-              <report>cpd</report>
-            </reports>
-          </reportSet>
-        </reportSets>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -699,23 +813,6 @@
           </tagListOptions>
         </configuration>
       </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>javancss-maven-plugin</artifactId>
-        <version>2.1</version>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.rat</groupId>
-        <artifactId>apache-rat-plugin</artifactId>
-        <configuration>
-          <excludes>
-            <exclude>site-content/**</exclude>
-            <exclude>src/site/resources/download_lang.cgi</exclude>
-            <exclude>src/site/resources/release-notes/RELEASE-NOTES-*.txt</exclude>
-            <exclude>src/test/resources/lang-708-input.txt</exclude>
-          </excludes>
-        </configuration>
-      </plugin>
     </plugins>
   </reporting>
 
@@ -732,7 +829,6 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-antrun-plugin</artifactId>
-            <version>1.8</version>
             <executions>
               <execution>
                 <id>prepare-checkout</id>
@@ -764,6 +860,71 @@
         </plugins>
       </build>
     </profile>
-  </profiles>
 
+    <profile>
+      <id>java9+</id>
+      <activation>
+        <jdk>[9,)</jdk>
+      </activation>
+      <properties>
+        <!-- LANG-1265: allow tests to access private fields/methods of java.base classes via reflection -->
+        <argLine>-Xmx512m --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED</argLine>
+        <!-- coverall version 4.3.0 does not work with java 9, see https://github.com/trautonen/coveralls-maven-plugin/issues/112 -->
+        <coveralls.skip>true</coveralls.skip>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>java11</id>
+      <activation>
+        <jdk>11</jdk>
+      </activation>
+      <properties>
+        <!-- workaround for https://bugs.openjdk.java.net/browse/JDK-8212233
+             which causes javadoc to fail with "Exit code: 1 - javadoc: error - The code being documented uses modules
+             but the packages defined in https://docs.oracle.com/javase/7/docs/api/ are in the unnamed module."  -->
+        <maven.javadoc.skip>true</maven.javadoc.skip>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>benchmark</id>
+      <properties>
+        <skipTests>true</skipTests>
+        <benchmark>org.apache</benchmark>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.6.0</version>
+            <executions>
+              <execution>
+                <id>benchmark</id>
+                <phase>test</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <classpathScope>test</classpathScope>
+                  <executable>java</executable>
+                  <arguments>
+                    <argument>-classpath</argument>
+                    <classpath/>
+                    <argument>org.openjdk.jmh.Main</argument>
+                    <argument>-rf</argument>
+                    <argument>json</argument>
+                    <argument>-rff</argument>
+                    <argument>target/jmh-result.${benchmark}.json</argument>
+                    <argument>${benchmark}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

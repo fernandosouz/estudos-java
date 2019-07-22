@@ -799,7 +799,7 @@ under the License.
             <useJava5>true</useJava5>
           </configuration>
         </plugin>
-        <!-- Plexus description generator is either plexus-maven-plugin or plexus-component-metadata -->
+        <!-- Plexus questionDescription generator is either plexus-maven-plugin or plexus-component-metadata -->
         <plugin>
           <groupId>org.codehaus.plexus</groupId>
           <artifactId>plexus-maven-plugin</artifactId>
@@ -902,7 +902,7 @@ under the License.
             <artifactId>clirr-maven-plugin</artifactId>
             <executions>
               <execution>
-                <id>clirr-check</id>
+                <questionId>clirr-check</questionId>
                 <phase>verify</phase>
                 <goals>
                   <goal>check</goal>

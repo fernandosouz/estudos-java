@@ -23,12 +23,12 @@
   <parent>
     <groupId>org.apache</groupId>
     <artifactId>apache</artifactId>
-    <version>19</version>
+    <version>21</version>
   </parent>
   <groupId>org.apache.commons</groupId>
   <artifactId>commons-parent</artifactId>
   <packaging>pom</packaging>
-  <version>47</version>
+  <version>48</version>
   <name>Apache Commons Parent</name>
   <url>http://commons.apache.org/commons-parent-pom.html</url>
   <description>The Apache Commons Parent POM provides common settings for all Apache Commons components.</description>
@@ -36,155 +36,6 @@
     <system>jira</system>
     <url>http://issues.apache.org/jira/browse/COMMONSSITE</url>
   </issueManagement>
-
-  <!--
-    Version 47:
-    
-    - Set the version of Apache Commons BCEL used by maven-project-info-reports-plugin to avoid 
-      "org.apache.bcel.classfile.ClassFormatException: Invalid byte tag in constant pool: 19"
-    - Allows JApiCmp's ignoreMissingClasses parameter to be easily overridable with the property commons.japicmp.ignoreMissingClasses.
-    - japicmp-maven-plugin 0.11.1 -> 0.12.0
-    - Add properties:
-      - commons.distSvnStagingUrl
-      - commons.releaseManagerName
-      - commons.releaseManagerKey
-    - maven-javadoc-plugin 3.0.0 -> 3.0.1 (Java 10 compatibility)
-    - maven-site-plugin 3.7.0 -> 3.7.1.
-    - org.apache.maven.wagon:wagon-ssh 3.0.0 -> 3.1.0
-    - maven-surefire-report-plugin 2.21.0 -> 2.22.0
-    - maven-enforcer-plugin 3.0.0-M1 -> 3.0.0-M2
-    - commons-release-plugin 1.2 -> 1.3
-    - commons-build-plugin 1.8 -> 1.9
-    - maven-surefire-plugin 2.21.0 -> 2.22.0
-    - maven-project-info-reports-plugin 2.9 -> 3.0.0
-  -->
-  
-  <!--
-    Version 46:
-
-    - japicmp-maven-plugin 0.11.0 -> 0.11.1
-    - maven-surefire-report-plugin 2.20.1 -> 2.21.0
-    - Add java-1.10 profile
-    - Add java-1.11 profile
-    - jacoco-maven-plugin 0.8.0 -> 0.8.1
-    - commons-build-plugin 1.7 -> 1.8
-    - commons-release-plugin 1.1 -> 1.2
-    - japicmp-maven-plugin: oldVersionPattern=\d+\.\d+\.\d*
-    - maven-assembly-plugin: 3.0.0 -> 3.1.0
-    - Set maven-jar-plugin version to 3.1.0.
-
-  -->
-
-  <!--
-    Version 45:
-
-    - Rearranging plugin order in -Prelease, removing commons-release-plugin from build>pluginManagement
-
-  -->
-
-  <!--
-    Version 44:
-
-    - new profile module-name to add 'Automatic-Module-Name' entry to the manifest
-    - felix:maven-bundle-plugin 3.4.0 -> 3.5.0.
-    - build artifacts -test.jar, -sources.jar and -test-sources.jar always, not only at release time
-    - maven-enforcer-plugin set version to 3.0.0-M1 and update Maven requirement from 3.0.0 to 3.0.5 (the latest 3.0.x.)
-    - jacoco-maven-plugin 0.7.9 -> 0.8.0.
-    - Fix japicmp config: add to reporting section and define ignoreMissingNewVersion explicitly
-    - org.apache:apache 18 -> 19
-    - add commons-release-plugin:1.1
-    - add spotbugs-maven-plugin: 3.1.3
-    - maven-surefire-plugin 2.20.1 -> 2.21.0
-    - maven-failsafe-plugin 2.20.1 -> 2.21.0
-
-  -->
-
-  <!--
-    Version 43:
-
-    - maven-compiler-plugin 3.6.1 -> 3.7.0
-    - jacoco-maven-plugin 0.7.7.201606060606 -> 0.7.9
-    - maven-javadoc-plugin 2.10.4 -> 3.0.0 (Java 9 compatibility)
-    - animal-sniffer-maven-plugin 1.15 -> 1.16
-    - commons.findbugs.version 3.0.3 -> 3.0.5 (requires Java 7)
-    - commons.clirr.version 2.7 -> 2.8
-    - maven-surefire-plugin 2.19.1 -> 2.20.1
-    - Add maven-failsafe-plugin 2.20.1 (to align with surefire.)
-    - felix:maven-bundle-plugin 3.0.1 -> 3.4.0 (requires Java 7.
-    - versions-maven-plugin 2.3 -> 2.5
-    - japicmp-maven-plugin 0.9.3 -> 0.11.0
-    - build-helper-maven-plugin 1.10 -> 3.0.0 (requires Maven 3 and Java 7.)
-    - wagon-ssh 2.10 -> 3.0.0
-    - maven-site-plugin 3.6 -> 3.7 (fixes Java 9 builds; for migrating from 3.4 to 3.5.1, see https://maven.apache.org/components/plugins/maven-site-plugin/migrate.html)
-
-  -->
-  <!--
-    Version 42:
-
-    - maven-changes-plugin 2.12 -> 2.12.1
-    - maven-site-plugin 3.4 -> 3.6 (for migrating from 3.4 to 3.5.1, see https://maven.apache.org/components/plugins/maven-site-plugin/migrate.html)
-    - jacoco-maven-plugin : 0.7.6.201602180812 -> 0.7.7.201606060606
-    - commons-build-plugin : 1.6 -> 1.7
-    - maven-changes-plugin : 2.12 -> 2.12.1
-    - Update japicmp: 0.8.0 -> 0.9.3
-    - maven-compiler-plugin : 3.5.1 -> 3.6.0
-    - new profiles travis-cobertura and travis-jacoco for running
-    coveralls coverage reports via Travis CI
-    - japicmp plugin no longer fail on "mvn site" (it requires
-    target/*jar), use "mvn package site -Pjapicmp" to include its report
-    - commons.japicmp.breakBuildOnBinaryIncompatibleModifications can be
-    used to override the breakBuildOnBinaryIncompatibleModifications
-    setting of the japicmp plugin (default is true)
-  -->
-  <!--
-    Version 41:
-
-    - Update Apache parent: 17 -> 18
-    - Changed ciManagement to Jenkins builds.apache.org
-    - RAT: Exclude Eclipse local files and folders
-    - maven-javadoc-plugin 2.10.3 -> 2.10.4
-    - commons.rat.version 0.11 -> 0.12
-    - maven-source-plugin 3.0.0 -> 3.0.1
-    - versions-maven-plugin 2.3
-    - new profile clirr (add src/site/resources/profile.clirr to enable, clirr report no longer automatic)
-    - new profile japicmp (add src/site/resources/profile.japicmp to enable)
-
-    Version 40:
-
-    - Update Apache parent: 16 -> 17
-    - Require minimum of Maven 3.0.5
-    - maven-release-plugin 2.5.2 -> 2.5.3
-    - buildnumber-maven-plugin 1.3 -> 1.4 (supports git SCM now)
-    - maven-assembly-plugin 2.5.5 -> 2.6
-    - maven-surefire-plugin 2.18.1 -> 2.19.1
-    - maven-compiler-plugin : 3.3 -> 3.5.1
-    - maven-changes-plugin : 2.11 -> 2.12
-    - commons-build-plugin : 1.4 -> 1.6
-    - COMMONSSITE-87 - ensure assembly plugin runs after all package phase plugins
-    - felix:maven-bundle-plugin : 2.5.3 -> 3.0.1
-    - maven-enforcer-plugin : 1.3.1 -> 1.4.1
-    - maven-project-info-reports-plugin : 2.8 -> 2.9
-    - maven-source-plugin : 2.4 -> 3.0.0
-    - animal-sniffer-maven-plugin : 1.11 -> 1.15
-    - build-helper-maven-plugin : 1.9.1 -> 1.10
-    - clirr-maven-plugin : 2.6.1 -> 2.7
-    - jacoco-maven-plugin : 0.7.5.201505241946 -> 0.7.6.201602180812
-    - maven-clean-plugin : 2.6.1 -> 3.0.0
-    - commons.findbugs.version : 3.0.0 -> 3.0.3
-    - wagon-ssh : 2.8 -> 2.10
-
-    Version 39:
-
-    - Update Compiler Plugin : 3.2 -> 3.3
-    - Update Build Helper Plugin : 1.8 -> 1.9.1
-    - Update Release Plugin : 2.5.1 -> 2.5.2
-    - Update Javadoc Plugin : 2.10.2 -> 2.10.3
-    - Update Jacoco 0.7.4.201502262128 -> 0.7.5.201505241946
-    - Move assembly to standard location. src/main => src/assembly/src.xml
-    - Update animal-sniffer Plugin : 1.13 -> 1.14 (for java 7+ builds) supporting Java8
-    - dropped the trunks-proper profile
-
-  -->
 
   <prerequisites>
     <maven>3.0.5</maven>
@@ -200,7 +51,7 @@
     [See COMMONSSITE-69]
     If updating from a previous version, please check the property definitions
 
-    Starting with version 22, the RAT plugin has changed Maven group and questionId, so any existing configuration
+    Starting with version 22, the RAT plugin has changed Maven group and id, so any existing configuration
     needs to be updated.
     To fix component POMs, please change any occurrences of:
     <groupId>org.codehaus.mojo</groupId>
@@ -217,13 +68,13 @@
 
     <distributionManagement>
     <site>
-    <questionId>commons.site</questionId>
+    <id>commons.site</id>
     <name>Apache Commons Site SVN</name>
     <url>scm:svn:${commons.scmPubUrl}</url>
     </site>
     </distributionManagement>
 
-    Alternatively you can map the component's existing site questionId to the
+    Alternatively you can map the component's existing site id to the
     commons.scmPubServer property.
 
     Coverage tool selection
@@ -249,9 +100,9 @@
     a release of the commons-parent POM.
   -->
   <scm>
-    <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/commons-parent/trunk</connection>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/commons-parent/trunk</developerConnection>
-    <url>http://svn.apache.org/viewvc/commons/proper/commons-parent/trunk</url>
+    <connection>scm:git:http://gitbox.apache.org/repos/asf/commons-parent.git</connection>
+    <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/commons-parent.git</developerConnection>
+    <url>https://gitbox.apache.org/repos/asf?p=commons-parent.git</url>
   </scm>
 
   <mailingLists>
@@ -267,12 +118,10 @@
       <subscribe>user-subscribe@commons.apache.org</subscribe>
       <unsubscribe>user-unsubscribe@commons.apache.org</unsubscribe>
       <post>user@commons.apache.org</post>
-      <archive>http://mail-archives.apache.org/mod_mbox/commons-user/</archive>
+      <archive>https://mail-archives.apache.org/mod_mbox/commons-user/</archive>
       <otherArchives>
-        <otherArchive>http://markmail.org/list/org.apache.commons.users/</otherArchive>
-        <otherArchive>http://old.nabble.com/Commons---User-f319.html</otherArchive>
-        <otherArchive>http://www.mail-archive.com/user@commons.apache.org/</otherArchive>
-        <otherArchive>http://news.gmane.org/gmane.comp.jakarta.commons.user</otherArchive>
+        <otherArchive>https://markmail.org/list/org.apache.commons.users/</otherArchive>
+        <otherArchive>https://www.mail-archive.com/user@commons.apache.org/</otherArchive>
       </otherArchives>
     </mailingList>
     <mailingList>
@@ -280,45 +129,40 @@
       <subscribe>dev-subscribe@commons.apache.org</subscribe>
       <unsubscribe>dev-unsubscribe@commons.apache.org</unsubscribe>
       <post>dev@commons.apache.org</post>
-      <archive>http://mail-archives.apache.org/mod_mbox/commons-dev/</archive>
+      <archive>https://mail-archives.apache.org/mod_mbox/commons-dev/</archive>
       <otherArchives>
-        <otherArchive>http://markmail.org/list/org.apache.commons.dev/</otherArchive>
-        <otherArchive>http://old.nabble.com/Commons---Dev-f317.html</otherArchive>
-        <otherArchive>http://www.mail-archive.com/dev@commons.apache.org/</otherArchive>
-        <otherArchive>http://news.gmane.org/gmane.comp.jakarta.commons.devel</otherArchive>
+        <otherArchive>https://markmail.org/list/org.apache.commons.dev/</otherArchive>
+        <otherArchive>https://www.mail-archive.com/dev@commons.apache.org/</otherArchive>
       </otherArchives>
     </mailingList>
     <mailingList>
       <name>Commons Issues List</name>
       <subscribe>issues-subscribe@commons.apache.org</subscribe>
       <unsubscribe>issues-unsubscribe@commons.apache.org</unsubscribe>
-      <archive>http://mail-archives.apache.org/mod_mbox/commons-issues/</archive>
+      <archive>https://mail-archives.apache.org/mod_mbox/commons-issues/</archive>
       <otherArchives>
-        <otherArchive>http://markmail.org/list/org.apache.commons.issues/</otherArchive>
-        <otherArchive>http://old.nabble.com/Commons---Issues-f25499.html</otherArchive>
-        <otherArchive>http://www.mail-archive.com/issues@commons.apache.org/</otherArchive>
+        <otherArchive>https://markmail.org/list/org.apache.commons.issues/</otherArchive>
+        <otherArchive>https://www.mail-archive.com/issues@commons.apache.org/</otherArchive>
       </otherArchives>
     </mailingList>
     <mailingList>
       <name>Commons Commits List</name>
       <subscribe>commits-subscribe@commons.apache.org</subscribe>
       <unsubscribe>commits-unsubscribe@commons.apache.org</unsubscribe>
-      <archive>http://mail-archives.apache.org/mod_mbox/commons-commits/</archive>
+      <archive>https://mail-archives.apache.org/mod_mbox/commons-commits/</archive>
       <otherArchives>
-        <otherArchive>http://markmail.org/list/org.apache.commons.commits/</otherArchive>
-        <otherArchive>http://www.mail-archive.com/commits@commons.apache.org/</otherArchive>
+        <otherArchive>https://markmail.org/list/org.apache.commons.commits/</otherArchive>
+        <otherArchive>https://www.mail-archive.com/commits@commons.apache.org/</otherArchive>
       </otherArchives>
     </mailingList>
     <mailingList>
       <name>Apache Announce List</name>
       <subscribe>announce-subscribe@apache.org</subscribe>
       <unsubscribe>announce-unsubscribe@apache.org</unsubscribe>
-      <archive>http://mail-archives.apache.org/mod_mbox/www-announce/</archive>
+      <archive>https://mail-archives.apache.org/mod_mbox/www-announce/</archive>
       <otherArchives>
-        <otherArchive>http://markmail.org/list/org.apache.announce/</otherArchive>
-        <otherArchive>http://old.nabble.com/Apache-News-and-Announce-f109.html</otherArchive>
-        <otherArchive>http://www.mail-archive.com/announce@apache.org/</otherArchive>
-        <otherArchive>http://news.gmane.org/gmane.comp.apache.announce</otherArchive>
+        <otherArchive>https://markmail.org/list/org.apache.announce/</otherArchive>
+        <otherArchive>https://www.mail-archive.com/announce@apache.org/</otherArchive>
       </otherArchives>
     </mailingList>
   </mailingLists>
@@ -359,7 +203,7 @@
     </testResources>
     <pluginManagement>
       <plugins>
-        <!-- org.apache.maven.plugins, alpha order by artifact questionId -->
+        <!-- org.apache.maven.plugins, alpha order by artifact id -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
@@ -476,6 +320,19 @@
           <artifactId>japicmp-maven-plugin</artifactId>
           <version>${commons.japicmp.version}</version>
           <configuration>
+            <oldVersion>
+              <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>${project.artifactId}</artifactId>
+                <version>${commons.bc.version}</version>
+                <type>jar</type>
+             </dependency>
+            </oldVersion>
+            <newVersion>
+              <file>
+                <path>${project.build.directory}/${project.artifactId}-${project.version}.${project.packaging}</path>
+              </file>
+            </newVersion>
             <parameter>
               <onlyModified>true</onlyModified>
               <breakBuildOnBinaryIncompatibleModifications>${commons.japicmp.breakBuildOnBinaryIncompatibleModifications}</breakBuildOnBinaryIncompatibleModifications>
@@ -485,7 +342,7 @@
               <skipPomModules>true</skipPomModules>
               <ignoreMissingClasses>${commons.japicmp.ignoreMissingClasses}</ignoreMissingClasses>
             </parameter>
-            <skip>true</skip>
+            <skip>${japicmp.skip}</skip>
           </configuration>
         </plugin>
         <plugin>
@@ -529,7 +386,7 @@
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>versions-maven-plugin</artifactId>
           <!-- Version 2.2 causes an NPE with Maven 3.3.9 -->
-          <version>2.5</version>
+          <version>2.7</version>
         </plugin>
         <plugin>
           <groupId>org.jacoco</groupId>
@@ -612,14 +469,14 @@
             <dependency>
               <groupId>org.apache.bcel</groupId>
               <artifactId>bcel</artifactId>
-              <version>6.2</version>
+              <version>6.3</version>
             </dependency>
           </dependencies>
         </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
-      <!-- org.apache.maven.plugins, alpha order by artifact questionId -->
+      <!-- org.apache.maven.plugins, alpha order by artifact id -->
       <plugin>
         <!-- Parent POM is released, so needs source archive for ASF mirrors -->
         <artifactId>maven-assembly-plugin</artifactId>
@@ -812,6 +669,15 @@
             <exclude>.externalToolBuilders/**</exclude>
           </excludes>
         </configuration>
+        <executions>
+          <execution>
+            <id>rat-check</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
 
       <plugin>
@@ -842,7 +708,7 @@
     <!-- N.B. plugins defined here in the <reporting> section ignore what's defined in <pluginManagement>
       in the <build> section above, so we have to define the versions here. -->
     <plugins>
-      <!-- org.apache.maven.plugins, alpha order by artifact questionId -->
+      <!-- org.apache.maven.plugins, alpha order by artifact id -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-changes-plugin</artifactId>
@@ -1247,6 +1113,9 @@
     <!-- alternative to clirr, will fail build if binary compatibility is broken -->
     <profile>
       <id>japicmp</id>
+      <properties>
+        <japicmp.skip>false</japicmp.skip>
+      </properties>
       <activation>
         <file>
           <exists>src/site/resources/profile.japicmp</exists>
@@ -1348,6 +1217,13 @@
             <artifactId>commons-release-plugin</artifactId>
             <version>${commons.release-plugin.version}</version>
             <executions>
+              <execution>
+                <id>clean-staging</id>
+                <phase>clean</phase>
+                <goals>
+                  <goal>clean-staging</goal>
+                </goals>
+              </execution>
               <execution>
                 <id>detatch-distributions</id>
                 <phase>verify</phase>
@@ -1680,6 +1556,7 @@
         <changes.jira.skip>true</changes.jira.skip>
         <rat.skip>true</rat.skip> <!-- from version 0.12 -->
         <jacoco.skip>true</jacoco.skip>
+        <japicmp.skip>true</japicmp.skip>
         <skipSurefireReport>true</skipSurefireReport>
       </properties>
     </profile>
@@ -1757,26 +1634,25 @@
     <commons.compiler.fork>false</commons.compiler.fork>
     <commons.compiler.compilerVersion />
     <commons.compiler.javac />
-    <commons.surefire.java />
 
     <!-- plugin versions (allows same value in reporting and build sections; also allows easy override) -->
-    <commons.build-plugin.version>1.9</commons.build-plugin.version>
-    <commons.release-plugin.version>1.3</commons.release-plugin.version>
-    <commons.surefire.version>2.22.0</commons.surefire.version>
-    <commons.failsafe.version>2.22.0</commons.failsafe.version>
-    <commons.surefire-report.version>2.22.0</commons.surefire-report.version>
-    <commons.javadoc.version>3.0.1</commons.javadoc.version>
-    <commons.rat.version>0.12</commons.rat.version>
+    <commons.build-plugin.version>1.10</commons.build-plugin.version>
+    <commons.release-plugin.version>1.6</commons.release-plugin.version>
+    <commons.surefire.version>2.22.1</commons.surefire.version>
+    <commons.failsafe.version>2.22.1</commons.failsafe.version>
+    <commons.surefire-report.version>2.22.1</commons.surefire-report.version>
+    <commons.javadoc.version>3.1.0</commons.javadoc.version>
+    <commons.rat.version>0.13</commons.rat.version>
     <commons.changes.version>2.12.1</commons.changes.version>
     <commons.clirr.version>2.8</commons.clirr.version>
-    <commons.japicmp.version>0.12.0</commons.japicmp.version>
-    <commons.jxr.version>2.5</commons.jxr.version>
+    <commons.japicmp.version>0.13.0</commons.japicmp.version>
+    <commons.jxr.version>3.0.0</commons.jxr.version>
     <commons.project-info.version>3.0.0</commons.project-info.version>
-    <commons.wagon-ssh.version>3.1.0</commons.wagon-ssh.version>
+    <commons.wagon-ssh.version>3.3.2</commons.wagon-ssh.version>
     <!--
       Note: Maven site plugin 3.5.1 is the latest version but is not a direct replacement:
 
-      http://maven.apache.org/plugins/maven-site-plugin/migrate.html
+      https://maven.apache.org/plugins/maven-site-plugin/migrate.html
 
       In particular, adding CDATA to header and footer sections is not backwards compatible.
       I.e. these have to be updated at the same time.
@@ -1807,21 +1683,21 @@
       </dependencies>
 
     -->
-    <commons.jar-plugin.version>3.1.0</commons.jar-plugin.version>
-    <commons.assembly-plugin.version>3.1.0</commons.assembly-plugin.version>
+    <commons.jar-plugin.version>3.1.1</commons.jar-plugin.version>
+    <commons.assembly-plugin.version>3.1.1</commons.assembly-plugin.version>
     <commons.site-plugin.version>3.7.1</commons.site-plugin.version>
-    <commons.jacoco.version>0.8.1</commons.jacoco.version>
+    <commons.jacoco.version>0.8.3</commons.jacoco.version>
     <commons.cobertura.version>2.7</commons.cobertura.version>
     <commons.coveralls.version>4.3.0</commons.coveralls.version>
     <commons.coveralls.timestampFormat>EpochMillis</commons.coveralls.timestampFormat>
     <commons.jdepend.version>2.0</commons.jdepend.version>
-    <commons.compiler.version>3.7.0</commons.compiler.version>
+    <commons.compiler.version>3.8.0</commons.compiler.version>
     <commons.scm-publish.version>1.1</commons.scm-publish.version>
     <commons.findbugs.version>3.0.5</commons.findbugs.version>
-    <commons.spotbugs.version>3.1.3</commons.spotbugs.version>
-    <commons.felix.version>3.5.0</commons.felix.version>
+    <commons.spotbugs.version>3.1.6</commons.spotbugs.version>
+    <commons.felix.version>4.1.0</commons.felix.version>
     <commons.build-helper.version>3.0.0</commons.build-helper.version>
-    <commons.animal-sniffer.version>1.16</commons.animal-sniffer.version>
+    <commons.animal-sniffer.version>1.17</commons.animal-sniffer.version>
     <!-- Almost all signatures use version 1.0. Allow override just in case -->
     <commons.animal-sniffer.signature.version>1.0</commons.animal-sniffer.signature.version>
 
@@ -1845,7 +1721,7 @@
     <commons.jacoco.lineRatio>0.90</commons.jacoco.lineRatio>
     <commons.jacoco.haltOnFailure>false</commons.jacoco.haltOnFailure>
 
-    <!-- The Commons Component questionId is used on the distribution server, for example:
+    <!-- The Commons component id is used on the distribution server, for example:
          - Use dbcp instead of dbcp2. 
          - Use collections instead of collections4.
          - Use lang instead of lang3. 
@@ -1853,7 +1729,8 @@
          - and so on... 
     -->
     <commons.componentid>${project.artifactId}</commons.componentid>
-    <!-- The Commons Component questionId is substring of the package name from o.a.commons.(.*)., for example:
+    
+    <!-- The package id is substring of the package name from o.a.commons.(.*)., for example:
          - Use dbcp2 instead of dbcp.
          - Use collections4 instead of collections.
          - Use lang3 instead of lang.
@@ -1928,7 +1805,9 @@
     <!-- allow japicmp's breakBuildOnBinaryIncompatibleModifications
       to be overridden, plugin's default is false -->
     <commons.japicmp.breakBuildOnBinaryIncompatibleModifications>true</commons.japicmp.breakBuildOnBinaryIncompatibleModifications>
-    <commons.japicmp.ignoreMissingClasses>false</commons.japicmp.ignoreMissingClasses>    
+    <commons.japicmp.ignoreMissingClasses>false</commons.japicmp.ignoreMissingClasses>
+    <!-- disable japicmp by default -->
+    <japicmp.skip>true</japicmp.skip>
 
     <!-- Commons Release plugin: dist dev site -->
     <commons.distSvnStagingUrl>scm:svn:https://dist.apache.org/repos/dist/dev/commons/${commons.componentid}</commons.distSvnStagingUrl>

@@ -205,7 +205,7 @@
   <!--
   <repositories>
     <repository>
-      <id>oss.sonatype.org</id>
+      <questionId>oss.sonatype.org</questionId>
       <name>Jetty Snapshot Repository</name>
       <layout>default</layout>
       <url>http://oss.sonatype.org/content/repositories/jetty-snapshots/</url>
@@ -219,7 +219,7 @@
   </repositories> 
   <pluginRepositories>
     <pluginRepository>
-      <id>oss.sonatype.org</id>
+      <questionId>oss.sonatype.org</questionId>
       <name>Jetty Snapshot Plugin Repository</name>
       <layout>default</layout>
       <url>http://oss.sonatype.org/content/repositories/jetty-snapshots/</url>

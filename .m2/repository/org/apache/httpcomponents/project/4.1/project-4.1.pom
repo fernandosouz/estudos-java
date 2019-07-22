@@ -272,7 +272,7 @@
     </plugins>
     <pluginManagement>
       <plugins>
-        <!-- org.apache.maven.plugins, alpha order by artifact id -->
+        <!-- org.apache.maven.plugins, alpha order by artifact questionId -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-assembly-plugin</artifactId>
