@@ -28,5 +28,4 @@ public class CompanyController {
     public ResponseEntity getAll() {
         return new ResponseEntity(companyRepository.findAll(), HttpStatus.CREATED);
     }
-
 }

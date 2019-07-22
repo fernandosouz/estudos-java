@@ -2,7 +2,6 @@ package feedbacksystem.com.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import feedbacksystem.com.demo.model.utils.AbstractEntity;
-import feedbacksystem.com.demo.utils.enums.QuestionsTypes;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,25 +22,20 @@ public class Question extends AbstractEntity {
     @JsonIgnoreProperties(value = {"questionList"})
     private Company company;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.DETACH, fetch= FetchType.LAZY)
     @JoinColumn(name = "question_id")
     @JsonIgnoreProperties(value = {"question"})
     private List<TextResponse> textResponseList;
 
     @OneToMany(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
     @JoinColumn(name = "question_id")
-    @JsonIgnoreProperties(value = {"question"})
+    @JsonIgnoreProperties(value = {"question", "justifications"})
     private List<PredefinedResponse> predefinedResponses;
 
     private Integer questionType;
 
-    public QuestionsTypes getQuestionType() {
-        return QuestionsTypes.toEnum(questionType);
-    }
-
-    public void setQuestionType(Integer questionType) {
-        this.questionType = questionType;
-    }
+    private Boolean showOnDashBoard;
+    private Boolean showOnFeedBackApp;
 
     public void merge(){
         this.getPredefinedResponses().forEach(predefinedResponse -> predefinedResponse.setQuestion(this));
