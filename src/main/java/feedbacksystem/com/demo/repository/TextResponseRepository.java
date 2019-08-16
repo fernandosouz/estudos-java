@@ -1,6 +1,5 @@
 package feedbacksystem.com.demo.repository;
 
-import feedbacksystem.com.demo.model.Question;
 import feedbacksystem.com.demo.model.TextResponse;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
