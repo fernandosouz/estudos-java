@@ -17,14 +17,12 @@ public class Unity extends AbstractEntity {
 
     private String name;
 
-    @OneToMany(fetch=FetchType.LAZY)
-    @JoinColumn(name = "unity_id")
-    @JsonIgnoreProperties(value = {"unity"})
+    @Transient
     private List<Question> questionList;
 
-
-    @ManyToOne
-    @JoinColumn(name = "company_id", referencedColumnName = "id")
-    @JsonIgnoreProperties(value = {"unityList"})
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="company_id")
+    @JsonIgnoreProperties({"unity"})
     private Company company;
+
 }

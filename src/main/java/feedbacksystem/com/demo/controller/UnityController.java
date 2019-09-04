@@ -29,7 +29,7 @@ public class UnityController {
     }
 
 
-    @GetMapping(value = "/units-by-company/{companyId}")
+    @GetMapping(value = "/unities-by-company/{companyId}")
     public ResponseEntity getAllUnitsByCompanyId(@PathVariable Long companyId) {
         return new ResponseEntity(unityRepository.findAllUnitsByCompanyId(companyId), HttpStatus.CREATED);
     }

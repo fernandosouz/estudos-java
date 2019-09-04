@@ -5,22 +5,23 @@ import feedbacksystem.com.demo.model.utils.AbstractEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.LazyGroup;
-import org.hibernate.annotations.LazyToOne;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
+@Transactional
 public class Company extends AbstractEntity {
 
     private String name;
 
-    @LazyGroup()
-    @OneToMany(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
-    @JoinColumn(name = "company_id")
+    @Transient
+    @JsonIgnoreProperties(value = "company")
     private List<Unity> unityList;
+
 }

@@ -2,18 +2,16 @@ package feedbacksystem.com.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import feedbacksystem.com.demo.model.utils.AbstractEntity;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ResponseCount extends AbstractEntity {
 
     private Long count;
@@ -25,11 +23,4 @@ public class ResponseCount extends AbstractEntity {
     private PredefinedResponse predefinedResponse;
 
 
-    public ResponseCount() {
-    }
-
-    public ResponseCount(Long count, PredefinedResponse predefinedResponse) {
-        this.count = count;
-        this.predefinedResponse = predefinedResponse;
-    }
 }

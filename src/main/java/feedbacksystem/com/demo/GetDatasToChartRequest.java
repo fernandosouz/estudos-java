@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 public class    GetDatasToChartRequest {
-    private List<Long> idsQuestions;
+    private Long unityId;
     private String startDate;
     private String endDate;
 }

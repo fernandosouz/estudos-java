@@ -16,6 +16,9 @@ public interface UnityRepository extends CrudRepository<Unity, Long> {
     @Query(value="SELECT u.id, u.name FROM unity u WHERE company_id = :companyId", nativeQuery = true)
     List<IdNameOfUnity> findAllUnitsByCompanyId(@Param("companyId") Long companyId);
 
+    @Query(value="SELECT u.* FROM unity u WHERE company_id = :companyId", nativeQuery = true)
+    List<Unity> findunitsByCompanyId(@Param("companyId") Long companyId);
+
 
 
 }
