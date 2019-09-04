@@ -15,17 +15,18 @@ public class PredefinedResponse extends AbstractEntity {
 
     private String description;
 
-    @ManyToOne(cascade = {CascadeType.MERGE}, fetch= FetchType.LAZY)
-    @JoinColumn(name = "question_id", referencedColumnName = "id")
+    @ManyToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name = "question_id")
     @JsonIgnoreProperties(value = {"predefinedResponses"})
     private Question question;
 
-    @OneToMany(cascade = CascadeType.DETACH, fetch= FetchType.LAZY)
+    /*@OneToMany(cascade = CascadeType.DETACH, fetch= FetchType.LAZY)
     @JoinColumn(name = "predefined_response_id")
-    @JsonIgnoreProperties(value = {"predefinedResponse"})
+    @JsonIgnoreProperties(value = {"predefinedResponse"})*/
+    @Transient
     private List<ResponseCount> responseCount;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
+   /* @OneToMany(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
     @JoinColumn(name = "predefined_response_id")
-    private List<Justification> justifications;
+    private List<Justification> justifications;*/
 }

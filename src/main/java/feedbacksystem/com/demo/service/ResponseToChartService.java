@@ -5,6 +5,7 @@ import feedbacksystem.com.demo.model.responses.chart.WrappedPredefinedResponseIn
 import feedbacksystem.com.demo.model.responses.chart.WrapperQuestion;
 import feedbacksystem.com.demo.repository.QuestionRepository;
 import feedbacksystem.com.demo.repository.ResponseCountRepository;
+import feedbacksystem.com.demo.repository.UnityRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -20,15 +21,18 @@ public class ResponseToChartService {
 
     private QuestionRepository questionRepository;
     private ResponseCountRepository responseCountRepository;
+    private UnityRepository unityRepository;
 
-    public ResponseToChartService(QuestionRepository questionRepository, ResponseCountRepository responseCountRepository) {
+    public ResponseToChartService(QuestionRepository questionRepository, ResponseCountRepository responseCountRepository, UnityRepository unityRepository) {
         this.questionRepository = questionRepository;
         this.responseCountRepository = responseCountRepository;
+        this.unityRepository = unityRepository;
     }
 
-    public List<WrapperQuestion> getQuestionWrappedWithCountOfPredefinedResponseSumBetweenDates(List<Long> idsQuestions, String startDate, String endDate) throws ParseException {
+    public List<WrapperQuestion> getQuestionWrappedWithCountOfPredefinedResponseSumBetweenDates(Long unityId, String startDate, String endDate) throws ParseException {
+
         List<Question> questionList = new ArrayList<>();
-        questionRepository.findAllByType(idsQuestions).forEach(questionList::add);
+        questionList.addAll(questionRepository.findAllByUnityId(unityId));
 
         Date start = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
         /*TODO ver outra forma de adicionar um à data final*/

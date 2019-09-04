@@ -24,8 +24,8 @@ public class ResponseToChartController {
     }
 
     @PostMapping(value = "/get-data-to-chart")
-    public ResponseEntity add(@RequestBody GetDatasToChartRequest dates) throws ParseException {
-        List<WrapperQuestion> wrapperQuestions = responseToChartService.getQuestionWrappedWithCountOfPredefinedResponseSumBetweenDates(dates.getIdsQuestions(), dates.getStartDate(), dates.getEndDate());
+    public ResponseEntity add(@RequestBody GetDatasToChartRequest getDatasToChartRequest) throws ParseException {
+        List<WrapperQuestion> wrapperQuestions = responseToChartService.getQuestionWrappedWithCountOfPredefinedResponseSumBetweenDates(getDatasToChartRequest.getUnityId(), getDatasToChartRequest.getStartDate(), getDatasToChartRequest.getEndDate());
         return  new ResponseEntity<>(wrapperQuestions, HttpStatus.OK);
     }
 
