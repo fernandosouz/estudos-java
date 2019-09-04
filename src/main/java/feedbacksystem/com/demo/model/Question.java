@@ -5,7 +5,12 @@ import feedbacksystem.com.demo.model.utils.AbstractEntity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
@@ -17,10 +22,10 @@ public class Question extends AbstractEntity {
 
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "company_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "unity_id", referencedColumnName = "id")
     @JsonIgnoreProperties(value = {"questionList"})
-    private Company company;
+    private Unity unity;
 
     @OneToMany(cascade = CascadeType.DETACH, fetch= FetchType.LAZY)
     @JoinColumn(name = "question_id")

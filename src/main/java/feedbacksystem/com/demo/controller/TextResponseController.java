@@ -44,8 +44,8 @@ public class TextResponseController {
 
 
     @GetMapping("/{id}/{start}/{end}")
-    public ResponseEntity getTextResponseFromQuestionsList(@PathVariable("id") Long companyId, @PathVariable("start") String start, @PathVariable("end") String end){
-        if(start != null && end != null && companyId != null) {
+    public ResponseEntity getTextResponseFromQuestionsList(@PathVariable("id") Long unityId, @PathVariable("start") String start, @PathVariable("end") String end){
+        if(start != null && end != null && unityId != null) {
             try {
                 Date startDateConverted = new SimpleDateFormat("yyyy-MM-dd").parse(start);
                 /*TODO ver outra forma de adicionar um à data final*/
@@ -53,7 +53,7 @@ public class TextResponseController {
 
                 List<QuestionWithTextResponse> questionListResponse = new ArrayList<>();
 
-                List<TextResponseWithQuestion> responseWithQuestions = questionRespository.getQuestionToTextResponse(companyId, startDateConverted, endDateConverted);
+                List<TextResponseWithQuestion> responseWithQuestions = questionRespository.getQuestionToTextResponse(unityId, startDateConverted, endDateConverted);
 
                 responseWithQuestions.forEach(textResponseWithQuestion -> {
                     if(doNotContainInListResponse(questionListResponse, textResponseWithQuestion)){

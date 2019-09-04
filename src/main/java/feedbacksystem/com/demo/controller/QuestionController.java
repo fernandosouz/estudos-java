@@ -36,14 +36,14 @@ public class QuestionController {
     }
 
     //TODO Adicionar um filtro para empresas (4)
-    @GetMapping("/company/{companyId}")
-    public ResponseEntity get(@PathVariable Long companyId){
-        return new ResponseEntity(questionRepository.findAllByCompanyId(companyId), HttpStatus.OK);
+    @GetMapping("/unity/{unityId}")
+    public ResponseEntity get(@PathVariable Long unityId){
+        return new ResponseEntity(questionRepository.findAllByUnityId(unityId), HttpStatus.OK);
     }
 
-    @GetMapping("/company/app/{companyId}")
-    public ResponseEntity getToApp(@PathVariable Long companyId){
-        return new ResponseEntity(questionRepository.findAllByCompanyIdToApp(companyId), HttpStatus.OK);
+    @GetMapping("/unity/app/{unityId}")
+    public ResponseEntity getToApp(@PathVariable Long unityId){
+        return new ResponseEntity(questionRepository.findAllByUnityIdToApp(unityId), HttpStatus.OK);
     }
 
 

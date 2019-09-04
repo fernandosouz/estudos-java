@@ -5,8 +5,6 @@ import feedbacksystem.com.demo.model.utils.AbstractEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.LazyGroup;
-import org.hibernate.annotations.LazyToOne;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,12 +13,18 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Company extends AbstractEntity {
+public class Unity extends AbstractEntity {
 
     private String name;
 
-    @LazyGroup()
-    @OneToMany(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
-    @JoinColumn(name = "company_id")
-    private List<Unity> unityList;
+    @OneToMany(fetch=FetchType.LAZY)
+    @JoinColumn(name = "unity_id")
+    @JsonIgnoreProperties(value = {"unity"})
+    private List<Question> questionList;
+
+
+    @ManyToOne
+    @JoinColumn(name = "company_id", referencedColumnName = "id")
+    @JsonIgnoreProperties(value = {"unityList"})
+    private Company company;
 }
