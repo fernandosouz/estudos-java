@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @CrossOrigin(origins = "*")
+@RequestMapping("unity")
 public class UnityController {
 
     UnityRepository unityRepository;
