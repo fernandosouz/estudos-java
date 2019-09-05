@@ -57,7 +57,19 @@ public class QuestionController {
 
     @GetMapping("/unity/app/{unityId}")
     public ResponseEntity getToApp(@PathVariable Long unityId){
-        return new ResponseEntity(questionRepository.findAllByUnityIdToApp(unityId), HttpStatus.OK);
+        List<Question> allByUnityIdToApp = questionRepository.findAllByUnityIdToApp(unityId);
+        if(allByUnityIdToApp.size() > 0 && allByUnityIdToApp != null){
+            allByUnityIdToApp.forEach( question -> {
+                List<PredefinedResponse> predefinedResponses = predefinedResponseRepository.findAllByQuestionId(question.getId());
+                if(predefinedResponses.size() > 0 ){
+                    for (PredefinedResponse predefinedRespons : predefinedResponses) {
+                        predefinedRespons.setQuestion(null);
+                    }
+                    question.setPredefinedResponses(predefinedResponses);
+                }
+            });
+        }
+        return new ResponseEntity(allByUnityIdToApp, HttpStatus.OK);
     }
 
 
