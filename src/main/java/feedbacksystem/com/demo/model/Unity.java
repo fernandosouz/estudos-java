@@ -2,6 +2,7 @@ package feedbacksystem.com.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import feedbacksystem.com.demo.model.utils.AbstractEntity;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
