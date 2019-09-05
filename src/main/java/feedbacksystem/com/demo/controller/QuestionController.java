@@ -28,6 +28,17 @@ public class QuestionController {
         this.predefinedResponseRepository = predefinedResponseRepository;
     }
 
+    @PostMapping("/to-many-unities")
+    public ResponseEntity addToManyUnities(@RequestBody List<Question> questionList) {
+        questionRepository.saveAll(questionList);
+        questionList.forEach(question -> {
+            question.getPredefinedResponses().forEach(predefinedResponse -> predefinedResponse.setQuestion(question));
+
+            predefinedResponseRepository.saveAll(question.getPredefinedResponses());
+        });
+        return new ResponseEntity(HttpStatus.CREATED);
+    }
+
     @PostMapping()
     public ResponseEntity add(@RequestBody Question question) {
         questionRepository.save(question);
