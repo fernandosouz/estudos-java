@@ -34,6 +34,19 @@ public class ResponseToChartService {
         List<Question> questionList = new ArrayList<>();
         questionList.addAll(questionRepository.findAllByUnityId(unityId));
 
+        return getWrapperQuestions(startDate, endDate, questionList);
+    }
+
+    public List<WrapperQuestion> getQuestionWrappedWithCountOfPredefinedResponseSumBetweenDatesByUniqueChart(List<Long> idQuestionList, String startDate, String endDate) throws ParseException {
+
+        List<Question> questionList = new ArrayList<>();
+
+        questionList.addAll((List<Question>) questionRepository.findAllById(idQuestionList));
+
+        return getWrapperQuestions(startDate, endDate, questionList);
+    }
+
+    public List<WrapperQuestion> getWrapperQuestions(String startDate, String endDate, List<Question> questionList) throws ParseException {
         Date start = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
         /*TODO ver outra forma de adicionar um à data final*/
         Date end = new Date(new SimpleDateFormat("yyyy-MM-dd").parse(endDate).getTime() + (1000 * 60 * 60 * 24));

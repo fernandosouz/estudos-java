@@ -12,4 +12,5 @@ public class    GetDatasToChartRequest {
     private Long unityId;
     private String startDate;
     private String endDate;
+    private List<Long> idsQuestions;
 }

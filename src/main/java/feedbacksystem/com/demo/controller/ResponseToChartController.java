@@ -29,4 +29,10 @@ public class ResponseToChartController {
         return  new ResponseEntity<>(wrapperQuestions, HttpStatus.OK);
     }
 
+    @PostMapping(value = "/get-data-to-unique-chart")
+    public ResponseEntity add2(@RequestBody GetDatasToChartRequest getDatasToChartRequest) throws ParseException {
+        List<WrapperQuestion> wrapperQuestions = responseToChartService.getQuestionWrappedWithCountOfPredefinedResponseSumBetweenDatesByUniqueChart(getDatasToChartRequest.getIdsQuestions(), getDatasToChartRequest.getStartDate(), getDatasToChartRequest.getEndDate());
+        return  new ResponseEntity<>(wrapperQuestions, HttpStatus.OK);
+    }
+
 }
