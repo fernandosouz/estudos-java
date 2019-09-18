@@ -32,7 +32,7 @@ public class ResponseToChartService {
     public List<WrapperQuestion> getQuestionWrappedWithCountOfPredefinedResponseSumBetweenDates(Long unityId, String startDate, String endDate) throws ParseException {
 
         List<Question> questionList = new ArrayList<>();
-        questionList.addAll(questionRepository.findAllByUnityId(unityId));
+        questionList.addAll(questionRepository.findAllByUnityIdAndFilter(unityId));
 
         return getWrapperQuestions(startDate, endDate, questionList);
     }
