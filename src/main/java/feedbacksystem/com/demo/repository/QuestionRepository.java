@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public interface QuestionRepository extends CrudRepository<Question,Long> {
 
-    @Query(value="SELECT q.* FROM question q WHERE q.unity_id=:id", nativeQuery = true)
+    @Query(value="SELECT q.* FROM question q WHERE q.unity_id=:id AND q.question_type = 1 ", nativeQuery = true)
     List<Question> findAllByUnityId(@Param("id") Long id);
 
     @Query(value="SELECT q.* FROM question q WHERE q.unity_id=:id AND q.show_on_feed_back_app", nativeQuery = true)

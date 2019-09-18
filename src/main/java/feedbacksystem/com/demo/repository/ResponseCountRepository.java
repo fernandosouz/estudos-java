@@ -30,6 +30,7 @@ public interface ResponseCountRepository extends CrudRepository<ResponseCount, L
             "          rc.created_date_time BETWEEN :start AND :end\n" +
             "          AND pr.question_id = :questionId\n" +
             "          AND q.question_type = 1\n" +
+            "          AND q.show_on_dash_board = true\n" +
             "    GROUP BY\n" +
             "             pr.id,\n" +
             "             pr.description\n" +
