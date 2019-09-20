@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -41,6 +42,12 @@ public class QuestionController {
 
     @PostMapping()
     public ResponseEntity add(@RequestBody Question question) {
+
+        if(question.getDescription().isEmpty() || question.getDescription().isEmpty()) throw new RuntimeException();
+        if(question.getQuestionType() == 1 && question.getPredefinedResponses().stream().filter(predefinedResponse -> predefinedResponse.getDescription().equals("")).count() > 0 ) throw new RuntimeException();
+        if(question.getQuestionType() == 2)
+            question.setPredefinedResponses(new ArrayList<>());
+
         questionRepository.save(question);
 
         question.getPredefinedResponses().forEach(predefinedResponse -> predefinedResponse.setQuestion(question));

@@ -51,7 +51,7 @@ public class ResponseToChartService {
         /*TODO ver outra forma de adicionar um à data final*/
         Date end = new Date(new SimpleDateFormat("yyyy-MM-dd").parse(endDate).getTime() + (1000 * 60 * 60 * 24));
 
-        return questionList.stream().map(question -> {
+        List<WrapperQuestion> wrapperQuestions = questionList.stream().map(question -> {
             WrapperQuestion wrapperQuestion = new WrapperQuestion();
             wrapperQuestion.setQuestionDescription(question.getDescription());
             wrapperQuestion.setQuestionId(question.getId());
@@ -59,6 +59,9 @@ public class ResponseToChartService {
             wrapperQuestion.setWrappedPredefinedResponse(wrappedPredefinedResponseInterface);
             return wrapperQuestion;
         }).collect(Collectors.toList());
+
+
+        return wrapperQuestions;
     }
 
 }

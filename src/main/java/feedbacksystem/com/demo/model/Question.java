@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -15,6 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Question extends AbstractEntity {
 
+    @NotBlank
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
