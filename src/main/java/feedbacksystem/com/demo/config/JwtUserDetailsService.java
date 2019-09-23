@@ -22,7 +22,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
         if(user.getLogin().equals(username)){
 //            SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            return new CustomUser(user.getLogin(), user.getPassword(), new ArrayList<>(), user.getId(), user.getAccessType().getType());
+            return new CustomUser(user.getLogin(), user.getPassword(), new ArrayList<>(), user.getId(), user.getAccessType().getType(), user.getCompany().getId());
         } else {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }

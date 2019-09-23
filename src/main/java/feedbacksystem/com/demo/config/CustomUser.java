@@ -1,7 +1,6 @@
 package feedbacksystem.com.demo.config;
 
 
-import feedbacksystem.com.demo.model.utils.AccessType;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -13,20 +12,22 @@ public class CustomUser extends User {
 
     private Long userId;
     private Integer accessType;
+    private Long companyId;
 
     public CustomUser(String username, String password, boolean enabled, boolean accountNonExpired,
                       boolean credentialsNonExpired,
                       boolean accountNonLocked,
-                      Collection<? extends GrantedAuthority> authorities, Long userID, Integer accessType) {
+                      Collection<? extends GrantedAuthority> authorities, Long userID, Integer accessType, Long companyId) {
         super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
         this.userId = userID;
         this.accessType = accessType;
+        this.companyId = companyId;
     }
 
     public CustomUser(String username, String password, Collection<? extends GrantedAuthority> authorities, Long userId,
-                      Integer accessType) {
+                      Integer accessType, Long companyId) {
         this(username, password, true, true, true, true,
-                authorities, userId, accessType);
+                authorities, userId, accessType, companyId);
     }
 
 

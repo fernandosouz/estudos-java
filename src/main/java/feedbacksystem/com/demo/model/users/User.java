@@ -1,5 +1,6 @@
 package feedbacksystem.com.demo.model.users;
 
+import feedbacksystem.com.demo.model.Company;
 import feedbacksystem.com.demo.model.utils.AbstractEntity;
 import feedbacksystem.com.demo.model.utils.AccessType;
 import lombok.Data;
@@ -18,4 +19,8 @@ public class User extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "access_type_id")
     private AccessType accessType;
+
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
 }
