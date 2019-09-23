@@ -19,7 +19,8 @@ public class TextResponse extends AbstractEntity {
 
     private String answer;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "identification_id")
+   /* @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "identification_id")*/
+    @Transient
     private Identification identification;
 }

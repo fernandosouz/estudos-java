@@ -16,14 +16,14 @@ public interface TextResponseRepository extends CrudRepository<TextResponse, Lon
     @Query(value = "SELECT tr.* FROM text_response tr " +
                         " INNER JOIN question q " +
                             " ON q.id = tr.question_id " +
-                        " INNER JOIN company c " +
-                            " ON c.id = q.company_id " +
+                        " INNER JOIN unity c " +
+                            " ON c.id = q.unity_id " +
                         " WHERE " +
-                            " c.id = :companyId " +
+                            " c.id = :unityId " +
                             " AND q.question_type = 2 " +
                             " AND tr.created_date_time BETWEEN :start AND :end", nativeQuery = true)
-    List<TextResponse> getTextResponseForQuestionsListByCompanyIdBetweenDates(
-            @Param("companyId") Long companyId,
+    List<TextResponse> getTextResponseForQuestionsListByUnityIdBetweenDates(
+            @Param("unityId") Long unityId,
             @Param("start") Date start,
             @Param("end") Date end);
 

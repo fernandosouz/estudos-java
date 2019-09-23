@@ -14,11 +14,14 @@ import java.util.List;
 @Repository
 public interface QuestionRepository extends CrudRepository<Question,Long> {
 
-    @Query(value="SELECT q.* FROM question q WHERE q.company_id=:id", nativeQuery = true)
-    List<Question> findAllByCompanyId(@Param("id") Long id);
+    @Query(value="SELECT q.* FROM question q WHERE q.unity_id=:id ", nativeQuery = true)
+    List<Question> findAllByUnityId(@Param("id") Long id);
 
-    @Query(value="SELECT q.* FROM question q WHERE q.company_id=:id AND q.show_on_feed_back_app", nativeQuery = true)
-    List<Question> findAllByCompanyIdToApp(@Param("id") Long id);
+    @Query(value="SELECT q.* FROM question q WHERE q.unity_id=:id AND q.question_type = 1 AND q.show_on_dash_board = true ", nativeQuery = true)
+    List<Question> findAllByUnityIdAndFilter(@Param("id") Long id);
+
+    @Query(value="SELECT q.* FROM question q WHERE q.unity_id=:id AND q.show_on_feed_back_app = true", nativeQuery = true)
+    List<Question> findAllByUnityIdToApp(@Param("id") Long id);
 
     @Query(value="SELECT q.* FROM question q " +
             "   WHERE q.id IN :idList      " +
@@ -36,14 +39,14 @@ public interface QuestionRepository extends CrudRepository<Question,Long> {
             " FROM question q " +
             " INNER JOIN text_response tr " +
             " ON q.id = tr.question_id " +
-            " INNER JOIN company c " +
-            " ON c.id = q.company_id " +
+            " INNER JOIN unity c " +
+            " ON c.id = q.unity_id " +
             " WHERE " +
-            " c.id = :companyId " +
+            " c.id = :unityId " +
             " AND q.question_type = 2 " +
             " AND tr.created_date_time BETWEEN :start AND :end", nativeQuery = true)
     List<TextResponseWithQuestion> getQuestionToTextResponse(
-            @Param("companyId") Long companyId,
+            @Param("unityId") Long unityId,
             @Param("start") Date start,
             @Param("end") Date end);
 
