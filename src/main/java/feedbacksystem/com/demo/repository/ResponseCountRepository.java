@@ -46,6 +46,7 @@ public interface ResponseCountRepository extends CrudRepository<ResponseCount, L
             "    q.id                    AS questionId,\n" +
             "    pr.description          AS predefinedResponseDescription,\n" +
             "    pr.id                   AS predefinedId,\n" +
+            "    pr.is_positive_response AS isPositiveResponse,\n" +
             "    CASE\n" +
             "        WHEN (sum(rc.count) ISNULL)\n" +
             "            THEN 0\n" +

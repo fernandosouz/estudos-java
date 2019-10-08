@@ -11,4 +11,5 @@ public class WrappedPredefinedResponse {
     private Long predefinedId;
     private Long sum;
     private String predefinedResponseDescription;
+    private Boolean isPositiveResponse;
 }
