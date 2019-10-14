@@ -100,6 +100,7 @@ public class ResponseToChartService {
                             .predefinedId(dataToChartOptimized.getpredefinedId())
                             .predefinedResponseDescription(dataToChartOptimized.getpredefinedResponseDescription())
                             .sum(dataToChartOptimized.getsum())
+                            .isPositiveResponse(dataToChartOptimized.getisPositiveResponse())
                             .build())
                     .collect(Collectors.toList());
 

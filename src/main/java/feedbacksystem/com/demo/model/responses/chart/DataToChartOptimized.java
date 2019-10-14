@@ -8,4 +8,5 @@ public interface DataToChartOptimized {
     String  getpredefinedResponseDescription();
     Long    getpredefinedId();
     Long    getsum();
+    Boolean getisPositiveResponse();
 }

@@ -26,6 +26,10 @@ public class PredefinedResponse extends AbstractEntity {
     @Transient
     private List<ResponseCount> responseCount;
 
+
+    private Boolean isPositiveResponse;
+
+
    /* @OneToMany(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
     @JoinColumn(name = "predefined_response_id")
     private List<Justification> justifications;*/

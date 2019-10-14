@@ -18,6 +18,8 @@ public class Unity extends AbstractEntity {
 
     private String name;
 
+    private Long idNpsQuestion;
+
     @Transient
     private List<Question> questionList;
 
